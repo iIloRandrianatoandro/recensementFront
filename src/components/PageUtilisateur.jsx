@@ -4,19 +4,45 @@ import axios from 'axios';
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import { styled, alpha } from "@mui/material/styles";
+import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
 
+
+export default function App() {
+  const navigate = useNavigate();
+  //titre des colonnes du tableau
 const columns = [
   { field: 'nomenclature', headerName: 'Nomenclature', width: 150, sortable: false, filterable: true, hideable: false, columnManageable: false },
   { field: 'designation', headerName: 'Désignation', width: 150, sortable: false, filterable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
   { field: 'existantApresEcriture', headerName: 'Existant apres écriture', width: 150, filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
-  { field: 'Column 2', headerName: 'recenser', width: 150, filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
+  {
+    field: 'recenser',
+    headerName: '', // Laissez le titre vide
+    width: 150,
+    filterable: false,
+    sortable: false,
+    disableColumnMenu: true,
+    hideable: false,
+    columnManageable: false,
+    renderCell: (params) => ( // Utilisez renderCell pour personnaliser la cellule
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={() => handleButtonClick(params.row.idRecensement)} // Remplacez handleButtonClick par votre logique de navigation
+      >
+        Recenser
+      </Button>
+    ),
+  },
 ];
+const handleButtonClick = (id) => {
+  console.log(id)
+  navigate(`/recenserMateriel/${id}`);
+};
 
-export default function App() {
   const baseUrl = 'http://localhost:8000/api';
   const [listematerielsARecenser, setListeMaterielsARecenser] = useState([]);
   const [filteredMateriel, setFilteredMateriel] = useState([]);
-  const [searchText, setSearchText] = useState(""); // État pour la valeur de recherche
   
 
   useEffect(() => {
@@ -69,12 +95,10 @@ const filterMateriel = (searchText) => {
     row.designation.toLowerCase().includes(searchText.toLowerCase())
   );
   setFilteredMateriel(filteredData);
+  console.log(filteredData)
 };
 
 const handleSearchInputChange = (e) => {
-  console.log(e.target.value)
-  //console.log(e.target.value)
-  //setSearchText(e.target.value);
   filterMateriel(e.target.value);
 };
   return (
@@ -87,9 +111,6 @@ const handleSearchInputChange = (e) => {
           placeholder="Recherche…"
           inputProps={{ "aria-label": "recherche" }}
           sx={{ color: "common.white" }}
-          //onChange={(e)=>console.log(e.target.value)}
-          //value={searchText}
-          //onChange={handleSearchInputChange}
           onKeyDown={async(e)=>{
             if (e.key==="Enter"){
               handleSearchInputChange(e)
