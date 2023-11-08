@@ -61,7 +61,6 @@ export default function ImporterListe() {
     // definition des state de l'application
     const [importer, setImporter] = useState(true);
     const [premiereUtilisation, setPremiereUtilisation] = useState(true);
-    const [afficherPremiereUtilisation, setAfficherPremiereUtilisation] = useState(true);
     const [excel, setExcel] = useState(null)
     const [annee, setAnnee] = useState(new Date());
     const [erreur, setErreur] = useState(false);
@@ -108,7 +107,6 @@ export default function ImporterListe() {
             'Content-Type': 'multipart/form-data',
           },
           data: {
-            premiereUtilisation: false,
             annee: annee.$y,
             file: excel,
           },            
@@ -128,17 +126,7 @@ export default function ImporterListe() {
             </BootstrapDialogTitle>
             <DialogContent dividers>
             <form onSubmit={demanderConfirmation} style={{ display: "flex", flexDirection: "column", gap: "10px"}}>
-                {afficherPremiereUtilisation && (
-                <FormGroup>
-                    <FormControlLabel control={
-                    <Switch  defaultChecked 
-                    checked={premiereUtilisation}
-                    onChange={getPremiereUtilisation}
-                    />} 
-                    label="Première utilisation" />
-                </FormGroup>
-                )}
-        <FormLabel>Année</FormLabel>
+                        <FormLabel>Année</FormLabel>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
       <DemoContainer components={['DatePicker']}>
         <DatePicker label="Année" 
