@@ -21,6 +21,9 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import dayjs from 'dayjs';
+import { TextField } from '@mui/material';
+
+import axios from "axios";
 
 
 //composant pour mettre le titre de la boite de dialogue du formulaire
@@ -85,20 +88,35 @@ export default function ImporterListe() {
     const demanderConfirmation=async(e)=>{
         e.preventDefault();
         setConfirme(true)
-        //setImporter(false)
     }
     const annulerImport=async(e)=>{
         e.preventDefault();
         setConfirme(false)
-        //setImporter(false)
     }
     useEffect(()=>{
     },[])
     const importerMateriel=async(e)=>{
         e.preventDefault();
-        console.log("a");
         setImporter(false)
         setConfirme(false)
+        console.log(excel)
+        console.log(annee.$y);
+        await axios.request({
+          url: `${baseUrl}/importer`,
+          method:"POST",
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+          data: {
+            premiereUtilisation: false,
+            annee: annee.$y,
+            file: excel,
+          },            
+        })
+        .then(res=>{
+          if(res.status===200){setImportEffectue(true);}
+        })
+        .catch(err=>{setErreur(true);console.log(err)})
     }
   return (
     <>
@@ -127,11 +145,13 @@ export default function ImporterListe() {
         views={['year']}
        // value={dayjs(annee)}
         onChange={getAnnee}
+        renderInput={(params) => <TextField {...params} 
+        />}
         />
       </DemoContainer>
     </LocalizationProvider>
         <FormLabel>Fichier Excel</FormLabel>
-        <MuiFileInput value={excel} onChange={getExcel} inputProps={{ accept: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }}/>
+        <MuiFileInput  value={excel} onChange={getExcel} inputProps={{ accept: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }}/>
         <Button
           variant="contained"
           type="submit"
