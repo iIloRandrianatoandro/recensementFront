@@ -115,11 +115,7 @@ export default function SuivreFlux() {
     else if(typeListe==="listeMaterielARecense"){
         setRows(listeMaterielARecense)
     }
-  },[typeListe])
-  //lors du montage initial du composant
-  useEffect(()=>{
-    getFlux()
-  },[listeMateriel, listeMaterielRecense, listeMaterielARecense]); 
+  },[typeListe,listeMateriel,listeMaterielARecense,listeMaterielRecense])
   // recuperer les materiel ayant les caractere saisis dans la zone de recherche
   const filterMateriel = (texte) => {
     const donneesFiltrees = rows.filter((row) =>
@@ -130,7 +126,7 @@ export default function SuivreFlux() {
   };
 
   const handleSearchInputChange = (e) => {
-    //filterMateriel(e.target.value);
+    filterMateriel(e.target.value);
     console.log(e.target.value)
   };
   return (
