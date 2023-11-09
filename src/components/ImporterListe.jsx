@@ -11,16 +11,12 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import PropTypes from 'prop-types';
 import { useState } from "react";
-import { useNavigate, useParams } from 'react-router-dom';
-import Switch from '@mui/material/Switch';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
+import { useNavigate } from 'react-router-dom';
 import { MuiFileInput } from 'mui-file-input'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import dayjs from 'dayjs';
 import { TextField } from '@mui/material';
 
 import axios from "axios";
@@ -60,106 +56,140 @@ export default function ImporterListe() {
     const navigate = useNavigate();
     // definition des state de l'application
     const [importer, setImporter] = useState(true);
-    const [premiereUtilisation, setPremiereUtilisation] = useState(true);
     const [excel, setExcel] = useState(null)
     const [annee, setAnnee] = useState(new Date());
     const [erreur, setErreur] = useState(false);
     const [importEffectue, setImportEffectue] = useState(false);
     const [confirme, setConfirme] = useState(false);
+    const [infoNonComplete, setInfoNonComplete] = useState(false);
+    const [anneeExistante, setAnneeExistante] = useState([]);
 
+    //itinialiser annee
     const getAnnee = (newYear) => {
         setAnnee(newYear);
     }
+    //initialiser excel
     const getExcel = (newFile) => {
         setExcel(newFile)
     }
 
     //fermer la fenetre
     const fermerFenetre=async(e)=>{
-        e.preventDefault();
+      e.preventDefault();
       setImporter(false);
       navigate(`/`);
     }
-    //obtenir la valeur de premierUtilisation
-    const getPremiereUtilisation = (event) => {
-        setPremiereUtilisation(event.target.checked);
-      };
+    //demander confirmation import
     const demanderConfirmation=async(e)=>{
-        e.preventDefault();
+      e.preventDefault();
+      if((excel===null)||(annee.$y===undefined)){//si l'utilisateur n'a pas selectionne de date ou fichier
+        //informer remplir toutes les informations
+        setInfoNonComplete(true)
+      }
+      else{
         setConfirme(true)
+        setInfoNonComplete(false)
+      }
     }
+    //annuler l'importation
     const annulerImport=async(e)=>{
-        e.preventDefault();
-        setConfirme(false)
+      e.preventDefault();
+      setConfirme(false)
+    }
+    //succes d'importation
+    const succes =async(e)=>{
+      e.preventDefault();
+      setImporter(false)
+      navigate('/')
     }
     useEffect(()=>{
+      //recuperer liste des annees avec recensement
+      const getAnneeExistante = async () => {
+        await axios.get(`${baseUrl}/listerAnneeAvecRecensement`)
+        .then(res => { 
+          setAnneeExistante(res.data); 
+          //console.log(anneeExistante)
+        })
+        .catch(err => console.log(err));
+      }
+      getAnneeExistante()
     },[])
+    //desactiver la selection annee ou il y a deja un recensement
+    const desactiverAnnee = (date) => {
+      return anneeExistante.some(annee => annee.includes(date.$y));
+    };
+    //importer la liste des materiels
     const importerMateriel=async(e)=>{
-        e.preventDefault();
-        setImporter(false)
-        setConfirme(false)
-        console.log(excel)
-        console.log(annee.$y);
-        await axios.request({
-          url: `${baseUrl}/importer`,
-          method:"POST",
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-          data: {
-            annee: annee.$y,
-            file: excel,
-          },            
-        })
-        .then(res=>{
-          if(res.status===200){setImportEffectue(true);}
-        })
-        .catch(err=>{setErreur(true);console.log(err)})
+      e.preventDefault();
+      setImportEffectue(false);
+      setConfirme(false)
+      await axios.request({
+        url: `${baseUrl}/importer`,
+        method:"POST",
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+        data: {
+          annee: annee.$y,
+          file: excel,
+        },            
+      })
+      .then(res=>{
+        if(res.status===200){setImportEffectue(true);}
+      })
+      .catch(err=>{setErreur(true);console.log(err)})
     }
   return (
     <>
-        <Dialog
-        open={importer}//la boite de dialogie s'ouvre quand importer==true
-        >
-            <BootstrapDialogTitle id="customized-dialog-title" onClose={fermerFenetre}>
-                Importer la liste des matériels à recenser
-            </BootstrapDialogTitle>
-            <DialogContent dividers>
-            <form onSubmit={demanderConfirmation} style={{ display: "flex", flexDirection: "column", gap: "10px"}}>
-                        <FormLabel>Année</FormLabel>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
-      <DemoContainer components={['DatePicker']}>
-        <DatePicker label="Année" 
-        views={['year']}
-       // value={dayjs(annee)}
-        onChange={getAnnee}
-        renderInput={(params) => <TextField {...params} 
-        />}
-        />
-      </DemoContainer>
-    </LocalizationProvider>
-        <FormLabel>Fichier Excel</FormLabel>
-        <MuiFileInput  value={excel} onChange={getExcel} inputProps={{ accept: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }}/>
-        <Button
-          variant="contained"
-          type="submit"
-          color="success"
-          sx={{ color:'black'}}
-        >
-          importer
-        </Button>
-        <Button
-          variant="contained"
-          type="button"
-          sx={{bgcolor:'yellow', color:'black'}}
-          onClick={fermerFenetre}
-        >
-          Annuler
-        </Button>
-      </form>
-    </DialogContent>
-    </Dialog>
-    {importEffectue && (
+      <Dialog
+      open={importer}//la boite de dialogie s'ouvre quand importer==true
+      >
+        <BootstrapDialogTitle id="customized-dialog-title" onClose={fermerFenetre}>
+          Importer la liste des matériels à recenser
+        </BootstrapDialogTitle>
+        <DialogContent dividers>
+          <form onSubmit={demanderConfirmation} style={{ display: "flex", flexDirection: "column", gap: "10px"}}>
+            <FormLabel>Année</FormLabel>
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DemoContainer components={['DatePicker']}>
+                <DatePicker label="Année" 
+                views={['year']}
+                shouldDisableYear={desactiverAnnee}
+                onChange={getAnnee}
+                renderInput={(params) => <TextField {...params} 
+                  />}
+                />
+              </DemoContainer>
+            </LocalizationProvider>
+            <FormLabel>Fichier Excel</FormLabel>
+            <MuiFileInput  value={excel} onChange={getExcel} inputProps={{ accept: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }}/>
+            {
+            infoNonComplete&&(
+            <div>
+              <p>Veuillez remplir toutes les informations</p>
+            </div>
+            )
+            }
+            <Button
+            variant="contained"
+            type="submit"
+            color="success"
+            sx={{ color:'black'}}
+            >
+              importer
+            </Button>
+            <Button
+            variant="contained"
+            type="button"
+            sx={{bgcolor:'yellow', color:'black'}}
+            onClick={fermerFenetre}
+            >
+              Annuler
+            </Button>
+          </form>
+        </DialogContent>
+      </Dialog>
+      {importEffectue && (
       <div>
         <Dialog
           open={importEffectue}
@@ -173,7 +203,7 @@ export default function ImporterListe() {
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={() => {setImportEffectue(false);navigate('/')}} autoFocus>
+            <Button onClick={succes} autoFocus>
               OK
             </Button>
           </DialogActions>
@@ -195,7 +225,7 @@ export default function ImporterListe() {
           </DialogContent>
           <DialogActions>
             <Button onClick={() => {setErreur(false);navigate('/')}} autoFocus>
-            OK
+              OK
             </Button>
           </DialogActions>
         </Dialog>
@@ -216,10 +246,10 @@ export default function ImporterListe() {
           </DialogContent>
           <DialogActions>
             <Button onClick={importerMateriel} autoFocus>
-            OK
+              OK
             </Button>
             <Button onClick={annulerImport} autoFocus>
-            Annuler
+              Annuler
             </Button>
           </DialogActions>
         </Dialog>
