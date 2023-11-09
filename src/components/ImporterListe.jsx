@@ -18,6 +18,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { TextField } from '@mui/material';
+import Alert from '@mui/material/Alert';
 
 import axios from "axios";
 
@@ -165,9 +166,7 @@ export default function ImporterListe() {
             <MuiFileInput  value={excel} onChange={getExcel} inputProps={{ accept: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }}/>
             {
             infoNonComplete&&(
-            <div>
-              <p>Veuillez remplir toutes les informations</p>
-            </div>
+            <Alert severity="error">Veuillez remplir toutes les informations</Alert>
             )
             }
             <Button

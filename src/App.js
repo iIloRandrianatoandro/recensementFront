@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import PageUtilisateur from "./components/PageUtilisateur";
 import RecenserMateriel from "./components/RecenserMateriel";
 import ImporterListe from "./components/ImporterListe";
+import SuivreFlux from "./components/SuivreFlux";
 
 import "./style/index.css";
 
@@ -11,6 +12,7 @@ function App() {
       <Route path="/" element={<PageUtilisateur/>}></Route>
       <Route path="/recenserMateriel/:id" element={<RecenserMateriel/>}></Route>
       <Route path="/importerListe/" element={<ImporterListe/>}></Route>
+      <Route path="/suivreFlux/" element={<SuivreFlux/>}></Route>
     </Routes>
   );
 }
