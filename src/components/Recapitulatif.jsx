@@ -10,7 +10,9 @@ import { FormControl } from '@mui/material';
 export default function Recapitulatif() {
     // base url backend
     const baseUrl = 'http://localhost:8000/api';
-    const [annee, setAnnee] = useState();
+    const now = new Date();
+    const anneeactuelle = now.getFullYear();
+    const [annee, setAnnee] = useState(anneeactuelle);
     const [anneeExistante, setAnneeExistante] = useState([]);
     const [nbTotalMateriels, setNbTotalMateriels] = useState(0);
     const [valeurTotaleMateriels, setValeurTotaleMateriels] = useState(0);
@@ -35,21 +37,30 @@ export default function Recapitulatif() {
         }
         getAnneeExistante()
     },[])
+    //recuperer donnees recapitulatif
+    const getRecapitulatif = async () => {
+        await axios.request({
+          url: `${baseUrl}/genererRecapitulatif`,
+          method:"POST",
+          data: {
+            annee: annee,
+          },            
+        })
+        .then(res => { 
+          console.log(res.data); 
+          setNbTotalMateriels(res.data.nbArticleTotal["totalArticles"]);
+          setValeurTotaleMateriels(res.data.valeurTotaleExistant["totalExistant"])
+          setNbArticleDeficit(res.data.nbArticleAvecDeficit) 
+          setNbArticleExcedent(res.data.nbArticleAvecExcedent) 
+        })
+        .catch(err => console.log(err));
+      }
     useEffect(()=>{
-          //recuperer donnees recapitulatif
-          const getRecapitulatif = async () => {
-              await axios.get(`${baseUrl}/genererRecapitulatif`)
-              .then(res => { 
-                console.log(res.data); 
-                setNbTotalMateriels(res.data.nbArticleTotal["totalArticles"]);
-                setValeurTotaleMateriels(res.data.valeurTotaleExistant["totalExistant"])
-                setNbArticleDeficit(res.data.nbArticleAvecDeficit) 
-                setNbArticleDeficit(res.data.nbArticleAvecExcedent) 
-              })
-              .catch(err => console.log(err));
-            }
           getRecapitulatif()
         },[])
+        useEffect(()=>{
+              getRecapitulatif()
+            },[annee])
   return (
     <>
       <InputLabel id="demo-simple-select-label">Annee</InputLabel>
