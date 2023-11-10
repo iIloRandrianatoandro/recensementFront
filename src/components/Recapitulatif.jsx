@@ -62,12 +62,15 @@ export default function Recapitulatif() {
   const [page, setPage] = useState(1);
   const [nombreLigneParPage, setNombreLigneParPage] = useState(30); 
   const [rows , setRows ] = useState([]);
-
+  
   const changerNombreLigneParPage = (newPageSize) => {
     setNombreLigneParPage(newPageSize);
     setPage(1); 
   };
-  //titre des colonnes du tableau
+  //deuxieme tableau
+  const [rows2 , setRows2 ] = useState([]);
+
+  //titre des colonnes du premie tableau des recensements
   const columns = [
     { field: 'designation', headerName: 'Désignation',  sortable: false, filterable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
     { field: 'especeUnite', headerName: 'Espèce unite',  sortable: false, filterable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
@@ -81,6 +84,15 @@ export default function Recapitulatif() {
     { field: 'valeurExistant', headerName: 'Valeur des existants',  filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
     { field: 'observation', headerName: 'Observation',  filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
     
+  ];
+  //titre des colonnes du premie tableau des recensements
+  const columns2 = [
+    { field: 'nomenclature', headerName: 'Nomenclature',  sortable: false, filterable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
+    { field: 'valeurExcedent', headerName: 'Excedent (valeur)',  sortable: false, filterable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
+    { field: 'valeurDeficit', headerName: 'Deficit (valeur)',  filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
+    { field: 'valeurExistant', headerName: 'Existant (valeur)',  filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
+    { field: 'nbArticle', headerName: 'Article (nombre)',  filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
+        
   ];
 
     const handleChange = (event) => {
@@ -124,6 +136,7 @@ export default function Recapitulatif() {
           setNomenclature(nomenclatures);
           setListeRecensementsTab(res.data.listeRecensementsTab); 
           setRows(res.data.recensementParNomenclature["3"]);
+          setRows2(res.data.recapParNomenclature)
         })
         .catch(err => console.log(err));
       }
@@ -245,6 +258,12 @@ export default function Recapitulatif() {
         pageSizeOptions={[30, 60, 100]}
         onPageSizeChange={changerNombreLigneParPage}
         locale="fr" // Correction ici
+      />
+      <DataGrid
+        rows={rows2}
+        columns={columns2}
+        getRowId={(row) => row.nomenclature}
+        hideFooterPagination
       />
     </>
   )
