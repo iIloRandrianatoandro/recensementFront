@@ -126,8 +126,21 @@ export default function SuivreFlux() {
   };
 
   const handleSearchInputChange = (e) => {
-    filterMateriel(e.target.value);
-    console.log(e.target.value)
+    if(e.target.value===""){
+      if(typeListe==="listeMateriel"){
+        setRows(listeMateriel)
+      }
+      else if(typeListe==="listeMaterielRecense"){
+        setRows(listeMaterielRecense)
+      }
+      else if(typeListe==="listeMaterielARecense"){
+        setRows(listeMaterielARecense)
+      }
+    }
+    else{
+      filterMateriel(e.target.value);
+    }
+    
   };
   return (
     <>

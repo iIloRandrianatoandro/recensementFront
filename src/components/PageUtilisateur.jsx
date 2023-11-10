@@ -57,7 +57,6 @@ export default function App() {
     await axios.get(`${baseUrl}/listeMaterielARecense/${annee}`)
     .then(res => { 
       setListeMaterielsARecenser(res.data); 
-      setListeMaterielsARecenser(res.data);
       setMaterielFilter(res.data);
     })
     .catch(err => console.log(err));
@@ -106,7 +105,13 @@ export default function App() {
   };
 
   const handleSearchInputChange = (e) => {
-    filterMateriel(e.target.value);
+    e.preventDefault();
+    if(e.target.value===""){
+      setMaterielFilter(listematerielsARecenser)
+    }
+    else{
+      filterMateriel(e.target.value);
+    }
   };
 
   return (
