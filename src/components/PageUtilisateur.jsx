@@ -6,6 +6,9 @@ import SearchIcon from "@mui/icons-material/Search";
 import { styled, alpha } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
 
 
 export default function App() {
@@ -45,8 +48,14 @@ export default function App() {
   //state à utiliser
   const [listematerielsARecenser, setListeMaterielsARecenser] = useState([]);
   const [materielFilter, setMaterielFilter] = useState([]);
+    const [nomenclature, setNomenclature] = useState([]);
+    const [nomenclatureSelectionne, setNomenclatureSelectionne] = useState(3);
   
 
+    const changerNomenclature=(e)=>{
+      //console.log(e.target.value)
+      setNomenclatureSelectionne(e.target.value)
+  }
   useEffect(() => {
     getListeMaterielsARecenser();
   }, []);
@@ -56,11 +65,22 @@ export default function App() {
     const annee = now.getFullYear();
     await axios.get(`${baseUrl}/listeMaterielARecense/${annee}`)
     .then(res => { 
-      setListeMaterielsARecenser(res.data); 
-      setMaterielFilter(res.data);
+      setListeMaterielsARecenser(res.data.listeMaterielARecense); 
+      setMaterielFilter(res.data.listeMaterielARecense);
+      const nomenclatures = res.data.nomenclatures.map(element => element["nomenclature"]);
+      setNomenclature(nomenclatures);
     })
     .catch(err => console.log(err));
   }
+  useEffect(()=>{
+    //console.log(nomenclatureSelectionne)
+    // recuperer les materiel ayant le nomenclature selectionnee
+    const donneesFiltrees = listematerielsARecenser.filter((row) =>
+        row.nomenclature.toLowerCase().includes(nomenclatureSelectionne)
+    );
+    //console.log(donneesFiltrees)
+    setMaterielFilter(donneesFiltrees)
+  },[nomenclatureSelectionne])
   //state pagination
   const [page, setPage] = useState(1);
   const [nombreLigneParPage, setNombreLigneParPage] = useState(30); 
@@ -131,6 +151,24 @@ export default function App() {
           }}
         />
       </Search>
+        {nomenclature.length > 0 && (
+       <RadioGroup
+       row
+       aria-labelledby="demo-row-radio-buttons-group-label"
+       name="row-radio-buttons-group"
+       value={nomenclatureSelectionne}
+       onChange={changerNomenclature}
+     >
+       {nomenclature.map((nomenclatureItem) => (
+         <FormControlLabel
+           value={nomenclatureItem}
+           key={nomenclatureItem}
+           control={<Radio />}
+           label={nomenclatureItem}
+         />
+       ))}
+     </RadioGroup>
+      )}
       <DataGrid
         rows={materielFilter}
         columns={columns}
