@@ -66,9 +66,10 @@ export default function App() {
     await axios.get(`${baseUrl}/listeMaterielARecense/${annee}`)
     .then(res => { 
       setListeMaterielsARecenser(res.data.listeMaterielARecense); 
-      setMaterielFilter(res.data.listeMaterielARecense);
+      //setMaterielFilter(res.data.listeMaterielARecense);
       const nomenclatures = res.data.nomenclatures.map(element => element["nomenclature"]);
       setNomenclature(nomenclatures);
+      setMaterielFilter(res.data.recensementParNomenclature["3"]);
     })
     .catch(err => console.log(err));
   }
@@ -119,7 +120,7 @@ export default function App() {
   // recuperer les materiel ayant les caractere saisis dans la zone de recherche
   const filterMateriel = (texte) => {
     const donneesFiltrees = listematerielsARecenser.filter((row) =>
-      row.designation.toLowerCase().includes(texte.toLowerCase())
+      ((row.designation.toLowerCase().includes(texte.toLowerCase()))&&(row.nomenclature.toLowerCase().includes(nomenclatureSelectionne)))
     );
     setMaterielFilter(donneesFiltrees);
   };
