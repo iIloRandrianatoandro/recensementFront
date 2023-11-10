@@ -57,6 +57,8 @@ export default function Recapitulatif() {
     const [nomenclature, setNomenclature] = useState([]);
     const [nomenclatureSelectionne, setNomenclatureSelectionne] = useState(3);
     const [listeRecensementsTab, setListeRecensementsTab] = useState([]);
+    const [valeurTotaleExcedent, setValeurTotaleExcedent] = useState(0);
+    const [valeurTotaleDeficit, setValeurTotaleDeficit] = useState(0);
 
     //state pagination
   const [page, setPage] = useState(1);
@@ -129,6 +131,8 @@ export default function Recapitulatif() {
           console.log(res.data); 
           setNbTotalMateriels(res.data.nbArticleTotal["totalArticles"]);
           setValeurTotaleMateriels(res.data.valeurTotaleExistant["totalExistant"])
+          setValeurTotaleDeficit(res.data.valeurTotaleDeficit["totalDeficit"]) 
+          setValeurTotaleExcedent(res.data.valeurTotaleExcedent["totalExcedent"]) 
           setNbArticleDeficit(res.data.nbArticleAvecDeficit) 
           setNbArticleExcedent(res.data.nbArticleAvecExcedent) 
           //console.log(res.data.nomenclatures)
@@ -212,6 +216,20 @@ export default function Recapitulatif() {
             id="standard-required"
             variant="standard"
             value={nbArticleDeficit}
+            disabled={true}
+          />
+          <FormLabel>Valeur totale des excédents</FormLabel>
+          <TextField
+            id="standard-required"
+            variant="standard"
+            value={valeurTotaleExcedent}
+            disabled={true}
+          />
+          <FormLabel>Valeur totale des déficits</FormLabel>
+          <TextField
+            id="standard-required"
+            variant="standard"
+            value={valeurTotaleDeficit}
             disabled={true}
           />
         </FormControl>
