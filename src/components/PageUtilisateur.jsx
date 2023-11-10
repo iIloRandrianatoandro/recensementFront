@@ -137,21 +137,6 @@ export default function App() {
 
   return (
     <div style={{ height: 500, width: '100%' }}>
-      <Search>
-        <SearchIconWrapper>
-          <SearchIcon sx={{ color: "common.white" }} />
-        </SearchIconWrapper>
-        <StyledInputBase
-          placeholder="Recherche…"
-          inputProps={{ "aria-label": "recherche" }}
-          sx={{ color: "common.white" }}
-          onKeyDown={async(e)=>{
-            if (e.key==="Enter"){
-              handleSearchInputChange(e)
-            }
-          }}
-        />
-      </Search>
         {nomenclature.length > 0 && (
        <RadioGroup
        row
@@ -170,6 +155,21 @@ export default function App() {
        ))}
      </RadioGroup>
       )}
+      <Search>
+        <SearchIconWrapper>
+          <SearchIcon sx={{ color: "common.white" }} />
+        </SearchIconWrapper>
+        <StyledInputBase
+          placeholder="Recherche…"
+          inputProps={{ "aria-label": "recherche" }}
+          sx={{ color: "common.white" }}
+          onKeyDown={async(e)=>{
+            if (e.key==="Enter"){
+              handleSearchInputChange(e)
+            }
+          }}
+        />
+      </Search>
       <DataGrid
         rows={materielFilter}
         columns={columns}

@@ -10,6 +10,38 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { DataGrid } from '@mui/x-data-grid';
+import { styled, alpha } from "@mui/material/styles";
+import InputBase from "@mui/material/InputBase";
+import SearchIcon from "@mui/icons-material/Search";
+
+
+  //composant pour la recherche
+  //div
+  const Search = styled("div")(({ theme }) => ({
+    position: "relative",
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: alpha(theme.palette.primary.main, 1),
+    "&:hover": {
+      backgroundColor: alpha(theme.palette.primary.main, 0.75),
+    },
+  }));
+  //icone
+  const SearchIconWrapper = styled("div")(({ theme }) => ({
+    padding: theme.spacing(0, 2),
+    height: "100%",
+    position: "absolute",
+    pointerEvents: "none",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  }));
+  //zone de texte
+  const StyledInputBase = styled(InputBase)(({ theme }) => ({
+    " & .MuiInputBase-input": {
+      padding: theme.spacing(1, 1, 1, 0),
+      paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    },
+  })); 
 
 export default function Recapitulatif() {
     // base url backend
@@ -110,6 +142,18 @@ export default function Recapitulatif() {
     //console.log(donneesFiltrees)
     setRows(donneesFiltrees)
   },[nomenclatureSelectionne])
+  // recuperer les materiel ayant les caractere saisis dans la zone de recherche
+  const filterMateriel = (texte) => {
+    const donneesFiltrees = listeRecensementsTab.filter((row) =>
+      ((row.designation.toLowerCase().includes(texte.toLowerCase()))&&(row.nomenclature.toLowerCase().includes(nomenclatureSelectionne)))
+    );
+    setRows(donneesFiltrees);
+  };
+
+  const handleSearchInputChange = (e) => {
+    e.preventDefault();
+      filterMateriel(e.target.value);
+  };
   return (
     <>
       <InputLabel id="demo-simple-select-label">Annee</InputLabel>
@@ -157,7 +201,8 @@ export default function Recapitulatif() {
             value={nbArticleDeficit}
             disabled={true}
           />
-        </FormControl>{nomenclature.length > 0 && (
+        </FormControl>
+        {nomenclature.length > 0 && (
        <RadioGroup
        row
        aria-labelledby="demo-row-radio-buttons-group-label"
@@ -175,6 +220,21 @@ export default function Recapitulatif() {
        ))}
      </RadioGroup>
       )}
+      <Search>
+        <SearchIconWrapper>
+          <SearchIcon sx={{ color: "common.white" }} />
+        </SearchIconWrapper>
+        <StyledInputBase
+          placeholder="Recherche…"
+          inputProps={{ "aria-label": "recherche" }}
+          sx={{ color: "common.white" }}
+          onKeyDown={async(e)=>{
+            if (e.key==="Enter"){
+              handleSearchInputChange(e)
+            }
+          }}
+        />
+      </Search>
       <DataGrid
         rows={rows}
         columns={columns}
