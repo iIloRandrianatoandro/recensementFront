@@ -154,7 +154,7 @@ export default function Recapitulatif() {
           },            
         })
         .then(res => { 
-          console.log(res.data); 
+          //console.log(res.data); 
           setNbTotalMateriels(res.data.nbArticleTotal["totalArticles"]);
           setValeurTotaleMateriels(res.data.valeurTotaleExistant["totalExistant"])
           setValeurTotaleDeficit(res.data.valeurTotaleDeficit["totalDeficit"]) 
@@ -197,6 +197,14 @@ export default function Recapitulatif() {
     e.preventDefault();
       filterMateriel(e.target.value);
   };
+  //recuperer liste des annees avec recensement
+  const genererExcel = async () => {
+    await axios.get(`${baseUrl}/export/${annee}`)
+    .then(res => { 
+      console.log(res)
+    })
+    .catch(err => console.log(err));
+  }
   return (
     <>
       <InputLabel id="demo-simple-select-label">Annee</InputLabel>
@@ -215,6 +223,7 @@ export default function Recapitulatif() {
             ))}
           </Select>
         )}
+        <Button onClick={() => genererExcel(annee)}>Générer un fichier Excel</Button>
         <FormControl>
           <FormLabel>Nombre total des matériels</FormLabel>
           <TextField

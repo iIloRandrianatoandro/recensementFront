@@ -10,17 +10,16 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
-
-export default function App() {
+export default function ListeMateriel() {
   //navigation
   const navigate = useNavigate();
   //titre des colonnes du tableau
   const columns = [
     { field: 'nomenclature', headerName: 'Nomenclature',  sortable: false, filterable: true, hideable: false, columnManageable: false },
     { field: 'designation', headerName: 'Désignation',  sortable: false, filterable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
-    { field: 'existantApresEcriture', headerName: 'Existant apres écriture',  filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
+    { field: 'especeUnite', headerName: 'Espece unité',  filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
     {
-      field: 'recenser',
+      field: 'modifier',
       headerName: '',
       filterable: false,
       sortable: false,
@@ -31,57 +30,56 @@ export default function App() {
         <Button
           variant="contained"
           color="primary"
-          onClick={() => RecenserMateriel(params.row.idRecensement)}
+          onClick={() => modifierMateriel(params.row.idMateriel)}
         >
-          Recenser
+          Modifier
         </Button>
       ),
     },
   ];
-  //recenser un matériel
-  const RecenserMateriel = (id) => {
-    navigate(`/recenserMateriel/${id}`);
-  };
   // base url backend
   const baseUrl = 'http://localhost:8000/api';
 
   //state à utiliser
-  const [listematerielsARecenser, setListeMaterielsARecenser] = useState([]);
+  const [listemateriel, setListeMateriel] = useState([]);
   const [materielFilter, setMaterielFilter] = useState([]);
   const [nomenclature, setNomenclature] = useState([]);
   const [nomenclatureSelectionne, setNomenclatureSelectionne] = useState(3);
   
 
-    const changerNomenclature=(e)=>{
-      //console.log(e.target.value)
-      setNomenclatureSelectionne(e.target.value)
+  const changerNomenclature=(e)=>{
+    //console.log(e.target.value)
+    setNomenclatureSelectionne(e.target.value)
   }
   useEffect(() => {
-    getListeMaterielsARecenser();
+    getListeMateriel();
   }, []);
   // recuperer liste des materiels a recenser
-  const getListeMaterielsARecenser = async () => {
-    const now = new Date();
-    const annee = now.getFullYear();
-    await axios.get(`${baseUrl}/listeMaterielARecense/${annee}`)
+  const getListeMateriel = async () => {
+    await axios.get(`${baseUrl}/listeMateriel`)
     .then(res => { 
-      setListeMaterielsARecenser(res.data.listeMaterielARecense); 
-      //setMaterielFilter(res.data.listeMaterielARecense);
+      console.log(res)
+      setListeMateriel(res.data.listeMateriel); 
+      setMaterielFilter(res.data.MaterielParNomenclature["3"]);
       const nomenclatures = res.data.nomenclatures.map(element => element["nomenclature"]);
+      //console.log(nomenclatures)
       setNomenclature(nomenclatures);
-      setMaterielFilter(res.data.recensementParNomenclature["3"]);
     })
     .catch(err => console.log(err));
   }
   useEffect(()=>{
     //console.log(nomenclatureSelectionne)
     // recuperer les materiel ayant le nomenclature selectionnee
-    const donneesFiltrees = listematerielsARecenser.filter((row) =>
+    const donneesFiltrees = listemateriel.filter((row) =>
         row.nomenclature.toLowerCase().includes(nomenclatureSelectionne)
     );
     //console.log(donneesFiltrees)
     setMaterielFilter(donneesFiltrees)
   },[nomenclatureSelectionne])
+  //modifier un matériel
+  const modifierMateriel = (id) => {
+    navigate(`/modifierMateriel/${id}`);
+  };
   //state pagination
   const [page, setPage] = useState(1);
   const [nombreLigneParPage, setNombreLigneParPage] = useState(30); 
@@ -119,22 +117,15 @@ export default function App() {
   })); 
   // recuperer les materiel ayant les caractere saisis dans la zone de recherche
   const filterMateriel = (texte) => {
-    const donneesFiltrees = listematerielsARecenser.filter((row) =>
+    const donneesFiltrees = listemateriel.filter((row) =>
       ((row.designation.toLowerCase().includes(texte.toLowerCase()))&&(row.nomenclature.toLowerCase().includes(nomenclatureSelectionne)))
     );
     setMaterielFilter(donneesFiltrees);
   };
-
   const handleSearchInputChange = (e) => {
     e.preventDefault();
-    if(e.target.value===""){
-      setMaterielFilter(listematerielsARecenser)
-    }
-    else{
       filterMateriel(e.target.value);
-    }
   };
-
   return (
     <div style={{ height: 500, width: '100%' }}>
         {nomenclature.length > 0 && (
@@ -173,7 +164,7 @@ export default function App() {
       <DataGrid
         rows={materielFilter}
         columns={columns}
-        getRowId={(row) => row.idRecensement}
+        getRowId={(row) => row.idMateriel}
         page={page}
         pageSize={nombreLigneParPage}
         onPageChange={(newPage) => setPage(newPage)}
@@ -183,5 +174,5 @@ export default function App() {
       />
 
     </div>
-  );
+  )
 }
