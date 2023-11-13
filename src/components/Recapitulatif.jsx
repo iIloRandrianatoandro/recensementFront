@@ -166,6 +166,8 @@ export default function Recapitulatif() {
           setNomenclature(nomenclatures);
           setListeRecensementsTab(res.data.listeRecensementsTab); 
           setRows(res.data.recensementParNomenclature["3"]);
+          console.log(res.data.recapParNomenclature)
+          console.log(annee)
           setRows2(res.data.recapParNomenclature)
         })
         .catch(err => console.log(err));
@@ -198,13 +200,31 @@ export default function Recapitulatif() {
       filterMateriel(e.target.value);
   };
   //recuperer liste des annees avec recensement
-  const genererExcel = async () => {
+  /*const genererExcel = async () => {
     await axios.get(`${baseUrl}/export/${annee}`)
     .then(res => { 
       console.log(res)
     })
     .catch(err => console.log(err));
-  }
+  }*/
+  const genererExcel = async () => {
+    try {
+      const response = await axios.get(`${baseUrl}/export/${annee}`, {
+        responseType: 'blob', // Indique à Axios de traiter la réponse comme un Blob (fichier)
+      });
+
+      // Créez un lien de téléchargement pour le fichier Excel
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'recensement.xlsx');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      console.error('Erreur lors de la génération du fichier Excel', error);
+    }
+  };
   return (
     <>
       <InputLabel id="demo-simple-select-label">Annee</InputLabel>
