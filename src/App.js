@@ -10,6 +10,7 @@ import CreerUtilisateur from "./components/CreerUtilisateur";
 import ModifierUtilisateur from "./components/ModifierUtilisateur";
 import ListeMateriel from "./components/ListeMateriel";
 import ModifierMateriel from "./components/ModifierMateriel";
+import Evolution from "./components/Evolution";
 
 import "./style/index.css";
 
@@ -27,6 +28,7 @@ function App() {
       <Route path="/modifierUtilisateur/" element={<ModifierUtilisateur/>}></Route>
       <Route path="/listerMateriel/" element={<ListeMateriel/>}></Route>
       <Route path="/modifierMateriel/:id" element={<ModifierMateriel/>}></Route>
+      <Route path="/evolution/" element={<Evolution/>}></Route>
     </Routes>
   );
 }
