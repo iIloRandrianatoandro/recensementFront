@@ -4,6 +4,7 @@ import RecenserMateriel from "./components/RecenserMateriel";
 import ImporterListe from "./components/ImporterListe";
 import SuivreFlux from "./components/SuivreFlux";
 import Recapitulatif from "./components/Recapitulatif";
+import ModifierRecensement from "./components/ModifierRecensement";
 
 import "./style/index.css";
 
@@ -15,6 +16,7 @@ function App() {
       <Route path="/importerListe/" element={<ImporterListe/>}></Route>
       <Route path="/suivreFlux/" element={<SuivreFlux/>}></Route>
       <Route path="/recapitulatif/" element={<Recapitulatif/>}></Route>
+      <Route path="/modifierRecensement/:id" element={<ModifierRecensement/>}></Route>
     </Routes>
   );
 }

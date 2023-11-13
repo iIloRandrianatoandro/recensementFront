@@ -13,6 +13,8 @@ import { DataGrid } from '@mui/x-data-grid';
 import { styled, alpha } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
+import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
 
 
   //composant pour la recherche
@@ -46,6 +48,9 @@ import SearchIcon from "@mui/icons-material/Search";
 export default function Recapitulatif() {
     // base url backend
     const baseUrl = 'http://localhost:8000/api';
+    //navigation
+    const navigate = useNavigate();
+
     const now = new Date();
     const anneeactuelle = now.getFullYear();
     const [annee, setAnnee] = useState(anneeactuelle);
@@ -84,9 +89,30 @@ export default function Recapitulatif() {
     { field: 'valeurExcedent', headerName: 'Valeur des excédents',  filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
     { field: 'constateesParRecensement', headerName: 'Constatés par recensement',  filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
     { field: 'valeurExistant', headerName: 'Valeur des existants',  filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
-    { field: 'observation', headerName: 'Observation',  filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
+    { field: 'observation', headerName: 'Observation',  filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },{
+      field: 'recenser',
+      headerName: '',
+      filterable: false,
+      sortable: false,
+      disableColumnMenu: true,
+      hideable: false,
+      columnManageable: false,
+      renderCell: (params) => ( 
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={() => modifierRecensement(params.row.idRecensement)}
+        >
+          Modifier
+        </Button>
+      ),
+    },
     
   ];
+  //recenser un matériel
+  const modifierRecensement = (id) => {
+    navigate(`/modifierRecensement/${id}`);
+  };
   //titre des colonnes du premie tableau des recensements
   const columns2 = [
     { field: 'nomenclature', headerName: 'Nomenclature',  sortable: false, filterable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
