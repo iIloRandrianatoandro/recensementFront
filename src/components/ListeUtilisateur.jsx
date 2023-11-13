@@ -103,7 +103,7 @@ export default function ListeUtilisateur() {
   };
   //supprimer un utilisateur
   const supprimerUtilisateur = async() => {
-    console.log(id)
+    //console.log(id)
     await axios.request({
      // url: `${baseUrl}/supprimerUtilisateur/${id}`,
       url: `${baseUrl}/supprimerUtilisateur/${id}`,
@@ -135,6 +135,9 @@ export default function ListeUtilisateur() {
   useEffect(() => {
     getListeUtilisateur();
   }, []);
+  useEffect(() => {
+    getListeUtilisateur();
+  }, [suppressionEffectuee]);
   // recuperer liste des materiels a recenser
   const getListeUtilisateur = async () => {
     await axios.get(`${baseUrl}/listerUtilisateur`)
@@ -165,7 +168,14 @@ export default function ListeUtilisateur() {
       filtrerUtilisateur(e.target.value);
   };
   return (
-    <>
+    <> 
+    <Button
+      variant="contained"
+      color="primary"
+      onClick={() => navigate('/creerUtilisateur')}
+    >
+      Créer un nouvel Utilisateur
+    </Button>
       <Search>
         <SearchIconWrapper>
           <SearchIcon sx={{ color: "common.white" }} />
