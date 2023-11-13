@@ -70,7 +70,6 @@ export default function SuivreFlux() {
   const [listeMaterielARecense, setListeMaterielARecense] = useState([]);
   const [typeListe, setTypeListe] = useState('listeMateriel');
   const [rows , setRows ] = useState([]);
-  const [materielFilter, setMaterielFilter] = useState([]);
   //state pagination
   const [page, setPage] = useState(1);
   const [nombreLigneParPage, setNombreLigneParPage] = useState(30); 
