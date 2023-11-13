@@ -10,6 +10,34 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
+
+  //composant pour la recherche
+  //div
+  const Search = styled("div")(({ theme }) => ({
+    position: "relative",
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: alpha(theme.palette.primary.main, 1),
+    "&:hover": {
+      backgroundColor: alpha(theme.palette.primary.main, 0.75),
+    },
+  }));
+  //icone
+  const SearchIconWrapper = styled("div")(({ theme }) => ({
+    padding: theme.spacing(0, 2),
+    height: "100%",
+    position: "absolute",
+    pointerEvents: "none",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  }));
+  //zone de texte
+  const StyledInputBase = styled(InputBase)(({ theme }) => ({
+    " & .MuiInputBase-input": {
+      padding: theme.spacing(1, 1, 1, 0),
+      paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    },
+  })); 
 export default function ListeMateriel() {
   //navigation
   const navigate = useNavigate();
@@ -88,33 +116,6 @@ export default function ListeMateriel() {
     setNombreLigneParPage(newPageSize);
     setPage(1); 
   };
-  //composant pour la recherche
-  //div
-  const Search = styled("div")(({ theme }) => ({
-    position: "relative",
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: alpha(theme.palette.primary.main, 1),
-    "&:hover": {
-      backgroundColor: alpha(theme.palette.primary.main, 0.75),
-    },
-  }));
-  //icone
-  const SearchIconWrapper = styled("div")(({ theme }) => ({
-    padding: theme.spacing(0, 2),
-    height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  }));
-  //zone de texte
-  const StyledInputBase = styled(InputBase)(({ theme }) => ({
-    " & .MuiInputBase-input": {
-      padding: theme.spacing(1, 1, 1, 0),
-      paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    },
-  })); 
   // recuperer les materiel ayant les caractere saisis dans la zone de recherche
   const filterMateriel = (texte) => {
     const donneesFiltrees = listemateriel.filter((row) =>

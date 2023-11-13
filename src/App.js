@@ -25,7 +25,7 @@ function App() {
       <Route path="/modifierRecensement/:id" element={<ModifierRecensement/>}></Route>
       <Route path="/listerUtilisateur/" element={<ListeUtilisateur/>}></Route>
       <Route path="/creerUtilisateur/" element={<CreerUtilisateur/>}></Route>
-      <Route path="/modifierUtilisateur/" element={<ModifierUtilisateur/>}></Route>
+      <Route path="/modifierUtilisateur/:id" element={<ModifierUtilisateur/>}></Route>
       <Route path="/listerMateriel/" element={<ListeMateriel/>}></Route>
       <Route path="/modifierMateriel/:id" element={<ModifierMateriel/>}></Route>
       <Route path="/evolution/" element={<Evolution/>}></Route>

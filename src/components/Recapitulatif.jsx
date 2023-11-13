@@ -166,8 +166,8 @@ export default function Recapitulatif() {
           setNomenclature(nomenclatures);
           setListeRecensementsTab(res.data.listeRecensementsTab); 
           setRows(res.data.recensementParNomenclature["3"]);
-          console.log(res.data.recapParNomenclature)
-          console.log(annee)
+          //console.log(res.data.recapParNomenclature)
+          //console.log(annee)
           setRows2(res.data.recapParNomenclature)
         })
         .catch(err => console.log(err));

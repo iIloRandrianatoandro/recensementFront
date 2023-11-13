@@ -72,7 +72,7 @@ export default function Evolution() {
         const getEvolution = async () => {
           await axios.get(`${baseUrl}/consulterEvolution5Ans`)
           .then(res => { 
-            console.log(res.data)
+            //console.log(res.data)
             //console.log(res.data.annee1Quantite[0]["count(idRecensement)"])
             const qtt1=[]
             if (res.data.annee1Quantite && res.data.annee1Quantite.length > 0) {
@@ -100,7 +100,7 @@ export default function Evolution() {
             } else {
               qtt1.push(0)
             }
-          console.log(qtt1)
+          //console.log(qtt1)
           setQuantite(qtt1)
             const vlr=[]
             vlr.push(res.data.annee1Valeur[0]["valeur"])
@@ -108,7 +108,7 @@ export default function Evolution() {
             vlr.push(res.data.annee3Valeur[0]["valeur"])
             vlr.push(res.data.annee4Valeur[0]["valeur"])
             vlr.push(res.data.annee5Valeur[0]["valeur"])
-            console.log(vlr)
+            //console.log(vlr)
             setValeur(vlr)
           })
           .catch(err => console.log(err));
@@ -122,7 +122,7 @@ export default function Evolution() {
     const getListeMateriel = async () => {
       await axios.get(`${baseUrl}/listeMateriel`)
       .then(res => { 
-        console.log(res)
+        //console.log(res)
         setListeMateriel(res.data.listeMateriel); 
         setMaterielFilter(res.data.listeMateriel);
       })
