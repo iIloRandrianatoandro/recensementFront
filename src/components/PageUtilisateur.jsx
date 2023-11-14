@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import NavBarUtilisateur from "./NavBarUtilisateur";
 
 
 export default function App() {
@@ -135,8 +136,9 @@ export default function App() {
     }
   };
 
-  return (
-    <div style={{ height: 500, width: '100%' }}>
+  return (<>
+    <NavBarUtilisateur></NavBarUtilisateur>
+    <div style={{ height: 500, width: '100%',paddingTop:150}}>
         {nomenclature.length > 0 && (
        <RadioGroup
        row
@@ -183,5 +185,6 @@ export default function App() {
       />
 
     </div>
+    </>
   );
 }

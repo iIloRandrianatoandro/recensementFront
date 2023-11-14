@@ -17,10 +17,12 @@ import ListeMateriel from "./components/ListeMateriel";
 import ModifierMateriel from "./components/ModifierMateriel";
 import Evolution from "./components/Evolution";
 import SeConnecter from "./components/SeConnecter";
+import Acceuil from "./components/Acceuil";
 
 import "./style/index.css";
 import AdminRouteProtege from "./components/AdminRouteProtege";
 import UtilisateurRouteProtege from "./components/UtilisateurRouteProtege";
+import NavBarUtilisateur from "./components/NavBarUtilisateur";
 
 function App() {
   const location = useLocation();
@@ -45,6 +47,8 @@ function App() {
           <Route path="/recenserMateriel/:id" element={<RecenserMateriel/>}></Route>
         </Route>
       <Route path="/seConnecter/" element={<SeConnecter/>}></Route>
+      <Route path="/" element={<Acceuil/>}></Route>
+      <Route path="/nav" element={<NavBarUtilisateur/>}></Route>
         
       </Routes>
     </ThemeProvider>
