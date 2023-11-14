@@ -1,5 +1,5 @@
 import React from 'react'
-import {FormLabel} from "@mui/material";
+import {Box, FormLabel} from "@mui/material";
 import { FormControl } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import { useState } from "react";
@@ -143,29 +143,37 @@ export default function SuivreFlux() {
   return (
     <>
     <NavBarAdmin></NavBarAdmin>
-      <FormControl>
-        <FormLabel>Nombre total des matériels</FormLabel>
-        <TextField
-          id="standard-required"
-          variant="standard"
-          value={nbTotalMateriels}
-          disabled={true}
-        />
-        <FormLabel>Nombre des matériels déjà recensés</FormLabel>
-        <TextField
-          id="standard-required"
-          variant="standard"
-          value={nbMaterielsRecenses}
-          disabled={true}
-        />
-        <FormLabel>Nombre des matériels qui restent à recenser</FormLabel>
-        <TextField
-          id="standard-required"
-          variant="standard"
-          value={nbMaterielsARecenser}
-          disabled={true}
-        />
-      </FormControl>
+      <Box  style={{ marginLeft: 250,marginTop: 115 }} >{/* body */}
+    <FormControl style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
+    <Box style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+      <FormLabel>Nombre total des matériels</FormLabel>
+      <TextField
+        id="standard-required"
+        variant="standard"
+        value={nbTotalMateriels}
+        disabled={true}
+      />
+    </Box>
+    <Box style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+      <FormLabel>Nombre des matériels déjà recensés</FormLabel>
+      <TextField
+        id="standard-required"
+        variant="standard"
+        value={nbMaterielsRecenses}
+        disabled={true}
+      />
+    </Box>
+    <Box style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+      <FormLabel>Nombre des matériels qui restent à recenser</FormLabel>
+      <TextField
+        id="standard-required"
+        variant="standard"
+        value={nbMaterielsARecenser}
+        disabled={true}
+      />
+    </Box>
+  </FormControl>
+  
       <RadioGroup
         row
         aria-labelledby="demo-row-radio-buttons-group-label"
@@ -177,22 +185,24 @@ export default function SuivreFlux() {
         <FormControlLabel value="listeMaterielRecense" control={<Radio />} label="Materiels recensés" />
         <FormControlLabel value="listeMaterielARecense" control={<Radio />} label="Matériels à recenser" />
       </RadioGroup>
-      <Search>
-        <SearchIconWrapper>
-          <SearchIcon sx={{ color: "common.white" }} />
-        </SearchIconWrapper>
-        <StyledInputBase
-          placeholder="Recherche…"
-          inputProps={{ "aria-label": "recherche" }}
-          sx={{ color: "common.white" }}
-          onKeyDown={async(e)=>{
-            if (e.key==="Enter"){
-              handleSearchInputChange(e)
-            }
-          }}
-        />
-      </Search>
-      <DataGrid
+      <div id="search" style={{ marginBottom: 20 }}>
+        <Search sx={{ width: 300, }} >
+          <SearchIconWrapper>
+            <SearchIcon sx={{ color: "common.white" }} />
+          </SearchIconWrapper>
+          <StyledInputBase
+            placeholder="Recherche…"
+            inputProps={{ "aria-label": "recherche" }}
+            sx={{ color: "common.white" }}
+            onKeyDown={async(e)=>{
+              if (e.key==="Enter"){
+                handleSearchInputChange(e)
+              }
+            }}
+          />
+        </Search>
+      </div>
+      <DataGrid  sx={{ height: 500, width: '100%' }}
         rows={rows}
         columns={columns}
         getRowId={(row) => row.idRecensement}
@@ -203,6 +213,7 @@ export default function SuivreFlux() {
         onPageSizeChange={changerNombreLigneParPage}
         locale="fr" // Correction ici
       />
+      </Box>
     </>
   )
 }

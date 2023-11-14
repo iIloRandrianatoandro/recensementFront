@@ -101,7 +101,7 @@ export default function ImporterListe() {
     const succes =async(e)=>{
       e.preventDefault();
       setImporter(false)
-      navigate('/')
+      navigate('/suivre flux')
     }
     useEffect(()=>{
       //recuperer liste des annees avec recensement
