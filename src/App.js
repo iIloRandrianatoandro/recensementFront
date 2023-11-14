@@ -11,6 +11,7 @@ import ModifierUtilisateur from "./components/ModifierUtilisateur";
 import ListeMateriel from "./components/ListeMateriel";
 import ModifierMateriel from "./components/ModifierMateriel";
 import Evolution from "./components/Evolution";
+import SeConnecter from "./components/SeConnecter";
 
 import "./style/index.css";
 
@@ -29,6 +30,7 @@ function App() {
       <Route path="/listerMateriel/" element={<ListeMateriel/>}></Route>
       <Route path="/modifierMateriel/:id" element={<ModifierMateriel/>}></Route>
       <Route path="/evolution/" element={<Evolution/>}></Route>
+      <Route path="/seConnecter/" element={<SeConnecter/>}></Route>
     </Routes>
   );
 }

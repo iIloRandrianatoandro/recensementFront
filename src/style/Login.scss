@@ -1,0 +1,30 @@
+ 
+#login
+{
+    width:100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+h2{
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 10px;
+    color: #55a51c;
+}
+#lock{
+    display: flex;
+    flex-direction: column;
+    padding-top: 30px;
+    align-items: center;
+    justify-content: center;
+}
+#label0{
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
