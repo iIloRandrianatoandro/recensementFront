@@ -245,7 +245,14 @@ export default function Evolution() {
     />
     {afficherEvolutionMateriel && (
     <>
-      <InputLabel>{designation}</InputLabel>
+    <InputLabel style={{ 
+  overflowWrap: 'break-word',
+  maxWidth: '500px', 
+}}>
+  {designation}
+</InputLabel>
+
+
       <BarChart
       width={500}
       height={300}

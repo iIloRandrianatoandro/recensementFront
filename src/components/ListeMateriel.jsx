@@ -10,6 +10,7 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import NavBarAdmin from './NavBarAdmin';
+import { Box, InputLabel } from '@mui/material';
 
 
   //composant pour la recherche
@@ -131,7 +132,7 @@ export default function ListeMateriel() {
   return (
     <>
     <NavBarAdmin></NavBarAdmin>
-    <div style={{ height: 500, width: '100%' }}>
+    <Box style={{ marginLeft: 300,marginTop: 110 }}>
         {nomenclature.length > 0 && (
        <RadioGroup
        row
@@ -139,7 +140,7 @@ export default function ListeMateriel() {
        name="row-radio-buttons-group"
        value={nomenclatureSelectionne}
        onChange={changerNomenclature}
-     >
+      >
        {nomenclature.map((nomenclatureItem) => (
          <FormControlLabel
            value={nomenclatureItem}
@@ -150,7 +151,8 @@ export default function ListeMateriel() {
        ))}
      </RadioGroup>
       )}
-      <Search>
+      <div id="search" style={{ marginBottom: 20 }}>
+      <Search sx={{ width: 300, }}>
         <SearchIconWrapper>
           <SearchIcon sx={{ color: "common.white" }} />
         </SearchIconWrapper>
@@ -165,7 +167,8 @@ export default function ListeMateriel() {
           }}
         />
       </Search>
-      <DataGrid
+        </div>
+      <DataGrid sx={{ height: 500, width: '90%' }}
         rows={materielFilter}
         columns={columns}
         getRowId={(row) => row.idMateriel}
@@ -176,8 +179,8 @@ export default function ListeMateriel() {
         onPageSizeChange={changerNombreLigneParPage}
         locale="fr" // Correction ici
       />
-
-    </div>
+      
+    </Box>
     </>
   )
 }
