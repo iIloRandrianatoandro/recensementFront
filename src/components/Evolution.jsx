@@ -7,7 +7,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import axios from 'axios';
 import Button from "@mui/material/Button";
 import NavBarAdmin from './NavBarAdmin';
-import { Box, Typography } from '@mui/material';
+import { Box, InputLabel, Typography } from '@mui/material';
 
  //composant pour la recherche
   //div
@@ -228,9 +228,10 @@ export default function Evolution() {
     };
   return (
     <>
-    {/*<NavBarAdmin></NavBarAdmin>*/}
-    <Box display="flex" flexDirection="row" flexWrap="wrap" justifyContent="space-between">
+    <NavBarAdmin></NavBarAdmin>
+    <Box display="flex" flexDirection="row" flexWrap="wrap" justifyContent="space-around" style={{ marginLeft: 230,marginTop: 110 }}>
       <Box >
+      <InputLabel>Evolution de tous les matériels</InputLabel>
     <BarChart
       width={500}
       height={300}
@@ -244,7 +245,7 @@ export default function Evolution() {
     />
     {afficherEvolutionMateriel && (
     <>
-      <Typography>{designation}</Typography>
+      <InputLabel>{designation}</InputLabel>
       <BarChart
       width={500}
       height={300}
@@ -277,7 +278,7 @@ export default function Evolution() {
         />
       </Search>
         </div>
-      <DataGrid sx={{ height: 600, width: '90%' }}
+      <DataGrid sx={{ height: 600, width: '100%' }}
         rows={materielFilter}
         columns={columns}
         getRowId={(row) => row.idMateriel}

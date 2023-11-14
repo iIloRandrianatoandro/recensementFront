@@ -16,6 +16,11 @@ import MailIcon from '@mui/icons-material/Mail';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 import LogoutIcon from '@mui/icons-material/Logout';
+import AddIcon from '@mui/icons-material/Add';
+import SummarizeIcon from '@mui/icons-material/Summarize';
+import ShowChartIcon from '@mui/icons-material/ShowChart';
+import PeopleIcon from '@mui/icons-material/People';
+import CategoryIcon from '@mui/icons-material/Category';
 import { useNavigate } from "react-router-dom";
 import "../style/NavBarUtilisateur.scss";
 
@@ -53,33 +58,42 @@ export default function NavBarAdmin() {
       <CssBaseline />
       <AppBar
         position="fixed"
-        sx={{ width: `calc(100% - ${drawerWidth}px)`, ml: `${drawerWidth}px`,bgcolor: "common.white" }}
-      >
+        sx={{
+          width: `calc(100% - ${drawerWidth}px)`,
+          ml: `${drawerWidth}px`,
+          bgcolor: "common.white",
+          //boxShadow: "none",
+          boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
+          borderBottom: "1px solid #e0e0e0",
+        }}
+      >{/*
       <Toolbar>
         <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1, ml: 2, color: "primary.main", fontWeight: "bold" }}>
         Ministère du Travail, de l'Emploi, de la Fonction Publique et des Lois Sociales
         </Typography>
-      </Toolbar>
-        {/*<Toolbar>
-        <div id="logo" onClick={toAcceuil}>
-          <img src="/images/LogoONN.jpeg" alt="logo" />
-        </div>
+      </Toolbar>*/}
+        <Toolbar
+          sx={{ height:96 }}>
 
-        <Typography
+
+<Typography
           variant="h6"
           component="div"
           sx={{ flexGrow: 1, ml: 2, color: "primary.main", fontWeight: "bold" }}
         >
-          Ministère du Travail, de l'Emploi, de la Fonction Publique et des Lois Sociales
+          Evolution sur 5 ans
         </Typography>
+        
         <Box sx={{ flexGrow: 0}}>
-        <Tooltip title="Se déconnecter">
-              <IconButton onClick={seDeconnecter} sx={{ p: 0 }}>
-              <LogoutIcon /> <Typography>Se déconnecter</Typography>
-              </IconButton>
-            </Tooltip>
+          <Typography
+          variant="h6"
+          component="div"
+          sx={{ flexGrow: 1, ml: 2, color: "primary.main", fontWeight: "bold" }}
+        >
+           Ministère du Travail, de l'Emploi, de la Fonction Publique et des Lois Sociales
+        </Typography>
           </Box>
-        </Toolbar>*/}
+        </Toolbar>
       </AppBar>
       <Drawer
         sx={{
@@ -93,13 +107,15 @@ export default function NavBarAdmin() {
         variant="permanent"
         anchor="left"
       >
-        <Toolbar />
+        <Toolbar  style={{ display: 'flex', justifyContent: 'center', alignItems: 'center',  boxShadow: '0px 4px 4px -2px rgba(0, 0, 0, 0.1)',}}>
+          <img src="/images/LogoONN.jpeg" alt="logo" onClick={toAcceuil} />
+        </Toolbar>
         <Divider />
         <List>
             <ListItem disablePadding>
               <ListItemButton onClick={goNouveau}>
                 <ListItemIcon>
-                   <MailIcon />
+                   <AddIcon />
                 </ListItemIcon>
                 <ListItemText primary={'Nouveau recensement'} />
               </ListItemButton>
@@ -107,7 +123,7 @@ export default function NavBarAdmin() {
             <ListItem disablePadding>
             <ListItemButton onClick={goRecapitulatif}>
               <ListItemIcon>
-                 <MailIcon />
+                 <SummarizeIcon />
               </ListItemIcon>
               <ListItemText primary={'Récapitulatif'} />
             </ListItemButton>
@@ -115,7 +131,7 @@ export default function NavBarAdmin() {
           <ListItem disablePadding>
           <ListItemButton onClick={goEvolution}>
             <ListItemIcon>
-               <MailIcon />
+               <ShowChartIcon />
             </ListItemIcon>
             <ListItemText primary={'Evolution'} />
           </ListItemButton>
@@ -123,7 +139,7 @@ export default function NavBarAdmin() {
         <ListItem disablePadding>
         <ListItemButton onClick={goUtilisateur}>
           <ListItemIcon>
-             <MailIcon />
+             <PeopleIcon />
           </ListItemIcon>
           <ListItemText primary={'Utilisateurs'} />
         </ListItemButton>
@@ -131,7 +147,7 @@ export default function NavBarAdmin() {
       <ListItem disablePadding>
       <ListItemButton onClick={goMateriel}>
         <ListItemIcon>
-           <MailIcon />
+           <CategoryIcon />
         </ListItemIcon>
         <ListItemText primary={'Matériels'} />
       </ListItemButton>
