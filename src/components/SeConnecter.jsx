@@ -51,7 +51,7 @@ export default function SeConnecter() {
               sessionStorage.setItem("isLogged", "true");
               sessionStorage.setItem("isUser", "true");
               sessionStorage.setItem("id", res.data["id"]);
-              navigate("/");
+              navigate("/pageUtilisateur");
             }
             else{
                 setNotLogged(true);

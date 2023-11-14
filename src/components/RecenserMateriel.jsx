@@ -100,7 +100,7 @@ export default function RecenserMateriel() {
   //fermer la fenetre
   const fermerFenetre=()=>{
     setRecenser(false);
-    navigate(`/`);
+    navigate(`/pageUtilisateur`);
   }
   useEffect(()=>{
     //recuperer les informations du recensement pour les afficher
@@ -195,7 +195,7 @@ export default function RecenserMateriel() {
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={() => {setRecensementEffectuer(false);navigate('/')}} autoFocus>
+            <Button onClick={() => {setRecensementEffectuer(false);navigate('/pageUtilisateur')}} autoFocus>
               OK
             </Button>
           </DialogActions>
@@ -216,7 +216,7 @@ export default function RecenserMateriel() {
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={() => {setErreur(false);navigate('/')}} autoFocus>
+            <Button onClick={() => {setErreur(false);navigate('/pageUtilisateur')}} autoFocus>
             OK
             </Button>
           </DialogActions>
