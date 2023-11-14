@@ -3,7 +3,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import axios from 'axios';
-import {FormLabel} from "@mui/material";
+import {Box, FormLabel} from "@mui/material";
 import TextField from '@mui/material/TextField';
 import { FormControl } from '@mui/material';
 import Radio from '@mui/material/Radio';
@@ -200,14 +200,6 @@ export default function Recapitulatif() {
     e.preventDefault();
       filterMateriel(e.target.value);
   };
-  //recuperer liste des annees avec recensement
-  /*const genererExcel = async () => {
-    await axios.get(`${baseUrl}/export/${annee}`)
-    .then(res => { 
-      console.log(res)
-    })
-    .catch(err => console.log(err));
-  }*/
   const genererExcel = async () => {
     try {
       const response = await axios.get(`${baseUrl}/export/${annee}`, {
@@ -228,118 +220,145 @@ export default function Recapitulatif() {
   };
   return (
     <>
-    <NavBarAdmin></NavBarAdmin>
-      <InputLabel id="demo-simple-select-label">Annee</InputLabel>
-        {anneeExistante.length > 0 && (
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={annee}
-            label="Age"
-            onChange={handleChange}
-          >
-            {anneeExistante.map((anneeItem) => (
-              <MenuItem value={anneeItem} key={anneeItem}>
-                {anneeItem}
-              </MenuItem>
-            ))}
-          </Select>
-        )}
-        <Button onClick={() => genererExcel(annee)}>Générer un fichier Excel</Button>
-        <FormControl>
-          <FormLabel>Nombre total des matériels</FormLabel>
-          <TextField
-            id="standard-required"
-            variant="standard"
-            value={nbTotalMateriels}
-            disabled={true}
-          />
-          <FormLabel>Valeur totale des matériels</FormLabel>
-          <TextField
-            id="standard-required"
-            variant="standard"
-            value={valeurTotaleMateriels}
-            disabled={true}
-          />
-          <FormLabel>Nombre de matériels ayant de excedent</FormLabel>
-          <TextField
-            id="standard-required"
-            variant="standard"
-            value={nbArticleExcedent}
-            disabled={true}
-          />
-          <FormLabel>Nombre de matériels ayant de déficit</FormLabel>
-          <TextField
-            id="standard-required"
-            variant="standard"
-            value={nbArticleDeficit}
-            disabled={true}
-          />
-          <FormLabel>Valeur totale des excédents</FormLabel>
-          <TextField
-            id="standard-required"
-            variant="standard"
-            value={valeurTotaleExcedent}
-            disabled={true}
-          />
-          <FormLabel>Valeur totale des déficits</FormLabel>
-          <TextField
-            id="standard-required"
-            variant="standard"
-            value={valeurTotaleDeficit}
-            disabled={true}
-          />
-        </FormControl>
-        {nomenclature.length > 0 && (
-       <RadioGroup
-       row
-       aria-labelledby="demo-row-radio-buttons-group-label"
-       name="row-radio-buttons-group"
-       value={nomenclatureSelectionne}
-       onChange={changerNomenclature}
-     >
-       {nomenclature.map((nomenclatureItem) => (
-         <FormControlLabel
-           value={nomenclatureItem}
-           key={nomenclatureItem}
-           control={<Radio />}
-           label={nomenclatureItem}
-         />
-       ))}
-     </RadioGroup>
-      )}
-      <Search>
-        <SearchIconWrapper>
-          <SearchIcon sx={{ color: "common.white" }} />
-        </SearchIconWrapper>
-        <StyledInputBase
-          placeholder="Recherche…"
-          inputProps={{ "aria-label": "recherche" }}
-          sx={{ color: "common.white" }}
-          onKeyDown={async(e)=>{
-            if (e.key==="Enter"){
-              handleSearchInputChange(e)
-            }
-          }}
-        />
-      </Search>
-      <DataGrid
-        rows={rows}
-        columns={columns}
-        getRowId={(row) => row.idRecensement}
-        page={page}
-        pageSize={nombreLigneParPage}
-        onPageChange={(newPage) => setPage(newPage)}
-        pageSizeOptions={[30, 60, 100]}
-        onPageSizeChange={changerNombreLigneParPage}
-        locale="fr" // Correction ici
-      />
-      <DataGrid
-        rows={rows2}
-        columns={columns2}
-        getRowId={(row) => row.nomenclature}
-        hideFooterPagination
-      />
+      <NavBarAdmin></NavBarAdmin>
+      <Box  style={{ marginLeft: 250,marginTop: 115 }} >{/* body */}
+        <Box display="flex" flexDirection="row" flexWrap="wrap" justifyContent="space-around" style={{ marginBottom: 20 }}>
+          <Box>{/* recap */}
+            <Box  >{/* annee et generer excel */}
+              <InputLabel id="demo-simple-select-label">Annee</InputLabel>
+              <Box display="flex" flexDirection="row" flexWrap="wrap" justifyContent="space-around" >{/* annee */}
+                <Box>
+                  {anneeExistante.length > 0 && (
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    value={annee}
+                    label="Age"
+                    onChange={handleChange}
+                  >
+                    {anneeExistante.map((anneeItem) => (
+                      <MenuItem value={anneeItem} key={anneeItem}>
+                        {anneeItem}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                  )}
+                </Box>
+                <Box>{/* generer excel */}
+                  <Button
+                    variant="contained"
+                    color="primary" 
+                    onClick={() => genererExcel(annee)}
+                  >
+                      Générer un fichier Excel
+                  </Button>    
+                </Box>
+              </Box>
+            </Box>
+            <Box>{/* formulaire */}
+              <FormControl>
+                <FormLabel>Nombre total des matériels</FormLabel>
+                <TextField
+                  id="standard-required"
+                  variant="standard"
+                  value={nbTotalMateriels}
+                  disabled={true}
+                />
+                <FormLabel>Nombre de matériels ayant de excedent</FormLabel>
+                <TextField
+                  id="standard-required"
+                  variant="standard"
+                  value={nbArticleExcedent}
+                  disabled={true}
+                />
+                <FormLabel>Nombre de matériels ayant de déficit</FormLabel>
+                <TextField
+                  id="standard-required"
+                  variant="standard"
+                  value={nbArticleDeficit}
+                  disabled={true}
+                />
+                <FormLabel>Valeur totale des excédents</FormLabel>
+                <TextField
+                  id="standard-required"
+                  variant="standard"
+                  value={valeurTotaleExcedent}
+                  disabled={true}
+                />
+                <FormLabel>Valeur totale des déficits</FormLabel>
+                <TextField
+                  id="standard-required"
+                  variant="standard"
+                  value={valeurTotaleDeficit}
+                  disabled={true}
+                />
+              </FormControl>
+            </Box>
+          </Box>
+          <Box>{/* tableau par nomenclature */}
+            <DataGrid sx={{ height: 250, width: '100%' }}
+              rows={rows2}
+              columns={columns2}
+              getRowId={(row) => row.nomenclature}
+              hideFooterPagination
+            />
+          </Box>
+        </Box>
+        <Box>{/* liste tous les materiels*/}
+          <Box display="flex" flexDirection="row" flexWrap="wrap" justifyContent="space-around" >{/* recherche et radiogroup */}
+            <div id="search" style={{ marginBottom: 20 }}>{/* recherche */}
+              <Search sx={{ width: 300, }} >
+                <SearchIconWrapper>
+                  <SearchIcon sx={{ color: "common.white" }} />
+                </SearchIconWrapper>
+                <StyledInputBase
+                  placeholder="Recherche…"
+                  inputProps={{ "aria-label": "recherche" }}
+                  sx={{ color: "common.white" }}
+                  onKeyDown={async(e)=>{
+                    if (e.key==="Enter"){
+                      handleSearchInputChange(e)
+                    }
+                  }}
+                />
+              </Search>
+            </div>
+            <Box>{/*radiogroup */}
+              {nomenclature.length > 0 && (
+              <RadioGroup
+                row
+                aria-labelledby="demo-row-radio-buttons-group-label"
+                name="row-radio-buttons-group"
+                value={nomenclatureSelectionne}
+                onChange={changerNomenclature}
+              >
+                {nomenclature.map((nomenclatureItem) => (
+                <FormControlLabel
+                  value={nomenclatureItem}
+                  key={nomenclatureItem}
+                  control={<Radio />}
+                  label={nomenclatureItem}
+                />
+                ))}
+              </RadioGroup>
+              )}
+            </Box>
+          </Box>
+          <Box>{/* datagrid*/}
+            <DataGrid  sx={{ height: 600, width: '100%' }}
+              rows={rows}
+              columns={columns}
+              getRowId={(row) => row.idRecensement}
+              page={page}
+              pageSize={nombreLigneParPage}
+              onPageChange={(newPage) => setPage(newPage)}
+              pageSizeOptions={[30, 60, 100]}
+              onPageSizeChange={changerNombreLigneParPage}
+              locale="fr" // Correction ici
+            />
+          </Box>
+        </Box>
+      </Box>
     </>
   )
 }

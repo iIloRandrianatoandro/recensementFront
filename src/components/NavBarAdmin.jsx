@@ -107,7 +107,7 @@ export default function NavBarAdmin() {
         variant="permanent"
         anchor="left"
       >
-        <Toolbar  style={{ display: 'flex', justifyContent: 'center', alignItems: 'center',  boxShadow: '0px 4px 4px -2px rgba(0, 0, 0, 0.1)',}}>
+        <Toolbar  style={{ display: 'flex', justifyContent: 'center', alignItems: 'center',  boxShadow: '0px 4px 4px -2px rgba(0, 0, 0, 0.1)',borderRight: 'none',}}>
           <img src="/images/LogoONN.jpeg" alt="logo" onClick={toAcceuil} />
         </Toolbar>
         <Divider />
