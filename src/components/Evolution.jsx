@@ -7,6 +7,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import axios from 'axios';
 import Button from "@mui/material/Button";
 import NavBarAdmin from './NavBarAdmin';
+import { Box, Typography } from '@mui/material';
 
  //composant pour la recherche
   //div
@@ -58,6 +59,7 @@ export default function Evolution() {
     const [listemateriel, setListeMateriel] = useState([]);
     const [materielFilter, setMaterielFilter] = useState([]);
     const [afficherEvolutionMateriel , setAfficherEvolutionMateriel ] = useState(false);
+    const [designation, setDesignation] = useState('');
     //state pagination
   const [page, setPage] = useState(1);
   const [nombreLigneParPage, setNombreLigneParPage] = useState(30); 
@@ -165,7 +167,7 @@ export default function Evolution() {
             <Button
               variant="contained"
               color="primary"
-              onClick={() => evolutionMateriel(params.row.idMateriel)}
+              onClick={() => evolutionMateriel(params.row.idMateriel,params.row.designation)}
             >
               Choisir
             </Button>
@@ -174,7 +176,8 @@ export default function Evolution() {
       
     ];
     //recenser un matériel
-    const evolutionMateriel = (id) => {
+    const evolutionMateriel = (id,designation) => {
+      setDesignation(designation)
       setAfficherListe(false)
       setAfficherEvolutionMateriel(true)
       console.log(id)
@@ -225,7 +228,9 @@ export default function Evolution() {
     };
   return (
     <>
-    <NavBarAdmin></NavBarAdmin>
+    {/*<NavBarAdmin></NavBarAdmin>*/}
+    <Box display="flex" flexDirection="row" flexWrap="wrap" justifyContent="space-between">
+      <Box >
     <BarChart
       width={500}
       height={300}
@@ -237,7 +242,26 @@ export default function Evolution() {
       yAxis={[{ id: 'leftAxisId' }, { id: 'rightAxisId' }]}
       rightAxis="rightAxisId"
     />
-    <Search>
+    {afficherEvolutionMateriel && (
+    <>
+      <Typography>{designation}</Typography>
+      <BarChart
+      width={500}
+      height={300}
+      series={[
+        { data: quantiteMateriel, label: 'Quantité', id: 'Quantite', yAxisKey: 'leftAxisId' },
+        { data: valeurMateriel, label: 'Valeur', id: 'Valeur',yAxisKey: 'rightAxisId' },
+      ]}
+      xAxis={[{ data: xLabels, scaleType: 'band' }]}
+      yAxis={[{ id: 'leftAxisId' }, { id: 'rightAxisId' }]}
+      rightAxis="rightAxisId"
+      />
+    </>
+    )}
+    </Box>
+      <Box>
+     <div id="search" style={{ marginBottom: 20 }}>
+    <Search sx={{ width: 300, }} >
         <SearchIconWrapper>
           <SearchIcon sx={{ color: "common.white" }} />
         </SearchIconWrapper>
@@ -252,8 +276,8 @@ export default function Evolution() {
           }}
         />
       </Search>
-      {afficherListe && (
-      <DataGrid
+        </div>
+      <DataGrid sx={{ height: 600, width: '90%' }}
         rows={materielFilter}
         columns={columns}
         getRowId={(row) => row.idMateriel}
@@ -264,21 +288,8 @@ export default function Evolution() {
         onPageSizeChange={changerNombreLigneParPage}
         locale="fr" // Correction ici
       />
-      )}
-      {afficherEvolutionMateriel && (
-      <BarChart
-      width={500}
-      height={300}
-      series={[
-        { data: quantiteMateriel, label: 'Quantité', id: 'Quantite', yAxisKey: 'leftAxisId' },
-        { data: valeurMateriel, label: 'Valeur', id: 'Valeur',yAxisKey: 'rightAxisId' },
-      ]}
-      xAxis={[{ data: xLabels, scaleType: 'band' }]}
-      yAxis={[{ id: 'leftAxisId' }, { id: 'rightAxisId' }]}
-      rightAxis="rightAxisId"
-
-    />
-      )}
+      </Box>
+      </Box>
     </>
   )
 }
