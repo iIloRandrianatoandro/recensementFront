@@ -14,6 +14,7 @@ import {
     Button, FormLabel
   } from "@mui/material";
 import NavBarAdmin from './NavBarAdmin';
+import { Box } from '@mui/material';
 
 
   //composant pour la recherche
@@ -171,14 +172,11 @@ export default function ListeUtilisateur() {
   return (
     <> 
     <NavBarAdmin></NavBarAdmin>
-    <Button
-      variant="contained"
-      color="primary"
-      onClick={() => navigate('/creerUtilisateur')}
-    >
-      Créer un nouvel Utilisateur
-    </Button>
-      <Search>
+    <Box style={{marginLeft: 300,marginTop: 130 }}>
+      <Box display="flex" flexDirection="row" flexWrap="wrap" justifyContent="space-around" >
+    
+      <div id="search" style={{ marginBottom: 20,marginRight: 'auto'  }}>
+      <Search sx={{ width: 300, }}>
         <SearchIconWrapper>
           <SearchIcon sx={{ color: "common.white" }} />
         </SearchIconWrapper>
@@ -193,7 +191,17 @@ export default function ListeUtilisateur() {
           }}
         />
       </Search>
-      <DataGrid
+      </div>
+      <Button
+    style={{ marginBottom: 20,marginRight: 'auto'  }}
+      variant="contained"
+      color="primary"
+      onClick={() => navigate('/creerUtilisateur')}
+    >
+      Créer un nouvel Utilisateur
+    </Button>
+      </Box>
+      <DataGrid sx={{ height: 500, width: '80%' }}
         rows={utilisateurFilter}
         columns={columns}
         getRowId={(row) => row.id}
@@ -270,6 +278,7 @@ export default function ListeUtilisateur() {
         </Dialog>
       </div>
       )}
+      </Box>
     </>
   )
 }
