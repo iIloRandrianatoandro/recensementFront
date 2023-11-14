@@ -13,6 +13,7 @@ import {
     DialogTitle,
     Button, FormLabel
   } from "@mui/material";
+import NavBarAdmin from './NavBarAdmin';
 
 
   //composant pour la recherche
@@ -169,6 +170,7 @@ export default function ListeUtilisateur() {
   };
   return (
     <> 
+    <NavBarAdmin></NavBarAdmin>
     <Button
       variant="contained"
       color="primary"

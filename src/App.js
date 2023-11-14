@@ -22,7 +22,7 @@ import Acceuil from "./components/Acceuil";
 import "./style/index.css";
 import AdminRouteProtege from "./components/AdminRouteProtege";
 import UtilisateurRouteProtege from "./components/UtilisateurRouteProtege";
-import NavBarUtilisateur from "./components/NavBarUtilisateur";
+import NavBarAdmin from "./components/NavBarAdmin";
 
 function App() {
   const location = useLocation();
@@ -48,7 +48,7 @@ function App() {
         </Route>
       <Route path="/seConnecter/" element={<SeConnecter/>}></Route>
       <Route path="/" element={<Acceuil/>}></Route>
-      <Route path="/nav" element={<NavBarUtilisateur/>}></Route>
+      <Route path="/nav" element={<NavBarAdmin/>}></Route>
         
       </Routes>
     </ThemeProvider>

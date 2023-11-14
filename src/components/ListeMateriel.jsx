@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import NavBarAdmin from './NavBarAdmin';
 
 
   //composant pour la recherche
@@ -128,6 +129,8 @@ export default function ListeMateriel() {
       filterMateriel(e.target.value);
   };
   return (
+    <>
+    <NavBarAdmin></NavBarAdmin>
     <div style={{ height: 500, width: '100%' }}>
         {nomenclature.length > 0 && (
        <RadioGroup
@@ -175,5 +178,6 @@ export default function ListeMateriel() {
       />
 
     </div>
+    </>
   )
 }

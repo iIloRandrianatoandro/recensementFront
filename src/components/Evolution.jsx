@@ -6,6 +6,7 @@ import { styled, alpha } from "@mui/material/styles";
 import { DataGrid } from '@mui/x-data-grid';
 import axios from 'axios';
 import Button from "@mui/material/Button";
+import NavBarAdmin from './NavBarAdmin';
 
  //composant pour la recherche
   //div
@@ -224,6 +225,7 @@ export default function Evolution() {
     };
   return (
     <>
+    <NavBarAdmin></NavBarAdmin>
     <BarChart
       width={500}
       height={300}
@@ -234,7 +236,6 @@ export default function Evolution() {
       xAxis={[{ data: xLabels, scaleType: 'band' }]}
       yAxis={[{ id: 'leftAxisId' }, { id: 'rightAxisId' }]}
       rightAxis="rightAxisId"
-
     />
     <Search>
         <SearchIconWrapper>

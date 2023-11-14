@@ -15,6 +15,7 @@ import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
 import Button from "@mui/material/Button";
 import { useNavigate } from "react-router-dom";
+import NavBarAdmin from './NavBarAdmin';
 
 
   //composant pour la recherche
@@ -227,6 +228,7 @@ export default function Recapitulatif() {
   };
   return (
     <>
+    <NavBarAdmin></NavBarAdmin>
       <InputLabel id="demo-simple-select-label">Annee</InputLabel>
         {anneeExistante.length > 0 && (
           <Select

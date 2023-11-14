@@ -4,8 +4,6 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
 import "../style/NavBarUtilisateur.scss";
-import InputTwoToneIcon from "@mui/icons-material/InputTwoTone";
-import {Button} from "@mui/material";
 import Box from '@mui/material/Box';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';

@@ -14,6 +14,7 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
 import axios from "axios";
+import NavBarAdmin from './NavBarAdmin';
 
 
   //composant pour la recherche
@@ -141,6 +142,7 @@ export default function SuivreFlux() {
   };
   return (
     <>
+    <NavBarAdmin></NavBarAdmin>
       <FormControl>
         <FormLabel>Nombre total des matériels</FormLabel>
         <TextField
