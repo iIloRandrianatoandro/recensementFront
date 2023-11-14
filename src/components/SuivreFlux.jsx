@@ -1,5 +1,5 @@
 import React from 'react'
-import {Box, FormLabel} from "@mui/material";
+import {Box, Button, FormLabel} from "@mui/material";
 import { FormControl } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import { useState } from "react";
@@ -140,10 +140,20 @@ export default function SuivreFlux() {
     }
     
   };
+  const importer=()=>{
+    navigate('/importerListe')
+  }
   return (
     <>
     <NavBarAdmin></NavBarAdmin>
       <Box  style={{ marginLeft: 250,marginTop: 115 }} >{/* body */}
+      <Button
+      style={{ marginBottom: 20 }}
+        variant="contained"
+        color="primary" 
+        onClick={() => importer()}>
+        Importer la liste des matériels à recenser
+        </Button>
     <FormControl style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
     <Box style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
       <FormLabel>Nombre total des matériels</FormLabel>
@@ -202,7 +212,7 @@ export default function SuivreFlux() {
           />
         </Search>
       </div>
-      <DataGrid  sx={{ height: 500, width: '100%' }}
+      <DataGrid  sx={{ height: 450, width: '100%' }}
         rows={rows}
         columns={columns}
         getRowId={(row) => row.idRecensement}

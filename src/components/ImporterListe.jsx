@@ -78,7 +78,7 @@ export default function ImporterListe() {
     const fermerFenetre=async(e)=>{
       e.preventDefault();
       setImporter(false);
-      navigate(`/`);
+      navigate(`/suivreFlux`);
     }
     //demander confirmation import
     const demanderConfirmation=async(e)=>{
@@ -223,7 +223,7 @@ export default function ImporterListe() {
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={() => {setErreur(false);navigate('/')}} autoFocus>
+            <Button onClick={() => {setErreur(false);navigate('/suivreFlux')}} autoFocus>
               OK
             </Button>
           </DialogActions>

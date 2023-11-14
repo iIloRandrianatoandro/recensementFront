@@ -39,7 +39,7 @@ export default function NavBarAdmin() {
       navigate("/");
     };
     const goNouveau = async (e) => {
-        navigate("/importerListe");
+        navigate("/suivreFlux");
     };
     const goRecapitulatif = async (e) => {
         navigate("/recapitulatif");
@@ -66,12 +66,7 @@ export default function NavBarAdmin() {
           boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.1)',
           borderBottom: "1px solid #e0e0e0",
         }}
-      >{/*
-      <Toolbar>
-        <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1, ml: 2, color: "primary.main", fontWeight: "bold" }}>
-        Ministère du Travail, de l'Emploi, de la Fonction Publique et des Lois Sociales
-        </Typography>
-      </Toolbar>*/}
+      >
         <Toolbar
           sx={{ height:96 }}>
 
@@ -117,7 +112,7 @@ export default function NavBarAdmin() {
                 <ListItemIcon>
                    <AddIcon />
                 </ListItemIcon>
-                <ListItemText primary={'Nouveau recensement'} />
+                <ListItemText primary={'Recensement en cours'} />
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
