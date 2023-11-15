@@ -19,6 +19,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { TextField } from '@mui/material';
 import Alert from '@mui/material/Alert';
+import { Box } from '@mui/material';
 
 import axios from "axios";
 
@@ -101,7 +102,7 @@ export default function ImporterListe() {
     const succes =async(e)=>{
       e.preventDefault();
       setImporter(false)
-      navigate('/suivre flux')
+      navigate('/suivreFlux')
     }
     useEffect(()=>{
       //recuperer liste des annees avec recensement
@@ -145,11 +146,11 @@ export default function ImporterListe() {
       <Dialog
       open={importer}//la boite de dialogie s'ouvre quand importer==true
       >
-        <BootstrapDialogTitle id="customized-dialog-title" onClose={fermerFenetre}>
+        <BootstrapDialogTitle id="customized-dialog-title" onClose={fermerFenetre}  sx={{ color: 'black' }}>
           Importer la liste des matériels à recenser
         </BootstrapDialogTitle>
         <DialogContent dividers>
-          <form onSubmit={demanderConfirmation} style={{ display: "flex", flexDirection: "column", gap: "10px"}}>
+          <form onSubmit={demanderConfirmation} style={{ display: "flex", flexDirection: "column", gap: "20px", width: "500px", maxWidth: "md", height: "400px", maxHeight: "md", marginTop:20}}>
             <FormLabel>Année</FormLabel>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DemoContainer components={['DatePicker']}>
@@ -166,25 +167,29 @@ export default function ImporterListe() {
             <MuiFileInput  value={excel} onChange={getExcel} inputProps={{ accept: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }}/>
             {
             infoNonComplete&&(
-            <Alert severity="error">Veuillez remplir toutes les informations</Alert>
+            <Alert severity="warning">Veuillez remplir toutes les informations</Alert>
             )
             }
+            <Box style={{ display: "flex", flexDirection: "row", gap: "10px",marginTop:30}}>
             <Button
-            variant="contained"
-            type="submit"
-            color="success"
-            sx={{ color:'black'}}
-            >
-              importer
-            </Button>
-            <Button
+            style={{width:"50%"}}
             variant="contained"
             type="button"
-            sx={{bgcolor:'yellow', color:'black'}}
+            sx={{ bgcolor: 'grey', color: 'black' }}
             onClick={fermerFenetre}
             >
               Annuler
             </Button>
+            <Button
+            style={{width:"50%"}}
+            variant="contained"
+            type="submit"
+            color="success"
+            sx={{ color: 'black' }}
+            >
+              importer
+            </Button>
+            </Box>
           </form>
         </DialogContent>
       </Dialog>
@@ -216,14 +221,14 @@ export default function ImporterListe() {
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
-          <DialogTitle id="alert-dialog-title">Erreur</DialogTitle>
+          <DialogTitle id="alert-dialog-title" sx={{color:'red'}}>Erreur</DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              Il y a une erreur pendant l'importation'
+              Il y a eu une erreur pendant l'importation
             </DialogContentText>
           </DialogContent>
-          <DialogActions>
-            <Button onClick={() => {setErreur(false);navigate('/suivreFlux')}} autoFocus>
+          <DialogActions >
+            <Button onClick={() => {setErreur(false);navigate('/suivreFlux')}} autoFocus >
               OK
             </Button>
           </DialogActions>
@@ -237,18 +242,25 @@ export default function ImporterListe() {
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
-          <DialogTitle id="alert-dialog-title">Confirmation</DialogTitle>
+          <DialogTitle id="alert-dialog-title" sx={{ color: 'black' }}>Confirmation</DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
-              Confirmer l'importation'
+              Confirmer l'importation
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={importerMateriel} autoFocus>
-              OK
-            </Button>
-            <Button onClick={annulerImport} autoFocus>
+            <Button onClick={annulerImport}  sx={{ bgcolor: 'grey', color: 'black' }}
+            style={{width:"50%"}}
+            variant="contained"
+            type="button">
               Annuler
+            </Button>
+            <Button onClick={importerMateriel} autoFocus sx={{ color: 'black' }}
+            style={{width:"50%"}}
+            variant="contained"
+            type="submit"
+            color="success">
+              OK
             </Button>
           </DialogActions>
         </Dialog>
