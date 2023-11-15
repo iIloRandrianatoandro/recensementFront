@@ -54,5 +54,7 @@ function App() {
     </ThemeProvider>
   );
 }
-
+const styles = ({ fontFamily }) => ({
+  fontFamily: "Roboto",
+});
 export default App;

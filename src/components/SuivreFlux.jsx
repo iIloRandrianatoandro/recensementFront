@@ -145,7 +145,7 @@ export default function SuivreFlux() {
   }
   return (
     <>
-    <NavBarAdmin></NavBarAdmin>
+    <NavBarAdmin titre="Recensement en cours"></NavBarAdmin>
       <Box  style={{ marginLeft: 250,marginTop: 115 }} >{/* body */}
       <Button
       style={{ marginBottom: 20 }}

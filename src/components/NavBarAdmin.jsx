@@ -11,11 +11,8 @@ import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
-import IconButton from '@mui/material/IconButton';
-import Tooltip from '@mui/material/Tooltip';
 import LogoutIcon from '@mui/icons-material/Logout';
+import AutorenewIcon from '@mui/icons-material/Autorenew';
 import AddIcon from '@mui/icons-material/Add';
 import SummarizeIcon from '@mui/icons-material/Summarize';
 import ShowChartIcon from '@mui/icons-material/ShowChart';
@@ -26,7 +23,7 @@ import "../style/NavBarUtilisateur.scss";
 
 const drawerWidth = 240;
 
-export default function NavBarAdmin() {
+export default function NavBarAdmin(props) {
     const navigate = useNavigate();
     const toAcceuil = () => {
       navigate("/");
@@ -68,7 +65,7 @@ export default function NavBarAdmin() {
         }}
       >
         <Toolbar
-          sx={{ height:96 }}>
+          sx={{ height:80 }}>
 
 
 <Typography
@@ -76,7 +73,7 @@ export default function NavBarAdmin() {
           component="div"
           sx={{ flexGrow: 1, ml: 2, color: "primary.main", fontWeight: "bold" }}
         >
-          Evolution sur 5 ans
+          {props.titre}
         </Typography>
         
         <Box sx={{ flexGrow: 0}}>
@@ -103,14 +100,14 @@ export default function NavBarAdmin() {
         anchor="left"
       >
         <Toolbar  style={{ display: 'flex', justifyContent: 'center', alignItems: 'center',  boxShadow: '0px 4px 4px -2px rgba(0, 0, 0, 0.1)',borderRight: 'none',}}>
-          <img src="/images/LogoONN.jpeg" alt="logo" onClick={toAcceuil} />
+          <img src="/images/fop.jpg" alt="logo" onClick={toAcceuil} />
         </Toolbar>
         <Divider />
         <List>
             <ListItem disablePadding>
               <ListItemButton onClick={goNouveau}>
                 <ListItemIcon>
-                   <AddIcon />
+                   <AutorenewIcon />
                 </ListItemIcon>
                 <ListItemText primary={'Recensement en cours'} />
               </ListItemButton>

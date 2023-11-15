@@ -220,7 +220,7 @@ export default function Recapitulatif() {
   };
   return (
     <>
-      <NavBarAdmin></NavBarAdmin>
+      <NavBarAdmin titre="Récapitulatif annuel"></NavBarAdmin>
       <Box  style={{ marginLeft: 250,marginTop: 115 }} >{/* body */}
         <Box display="flex" flexDirection="row" flexWrap="wrap" justifyContent="space-around" style={{ marginBottom: 20, marginTop:100 }}>
           <Box>{/* recap */}

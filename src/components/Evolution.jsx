@@ -228,7 +228,7 @@ export default function Evolution() {
     };
   return (
     <>
-    <NavBarAdmin></NavBarAdmin>
+    <NavBarAdmin titre="Evolution sur 5 ans"></NavBarAdmin>
     <Box display="flex" flexDirection="row" flexWrap="wrap" justifyContent="space-around" style={{ marginLeft: 230,marginTop: 110 }}>
       <Box >
       <InputLabel>Evolution de tous les matériels</InputLabel>

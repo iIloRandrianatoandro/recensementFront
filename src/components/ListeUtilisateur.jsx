@@ -171,7 +171,7 @@ export default function ListeUtilisateur() {
   };
   return (
     <> 
-    <NavBarAdmin></NavBarAdmin>
+    <NavBarAdmin titre="Liste des utilisateurs"></NavBarAdmin>
     <Box style={{marginLeft: 300,marginTop: 130 }}>
       <Box display="flex" flexDirection="row" flexWrap="wrap" justifyContent="space-around" >
     

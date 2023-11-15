@@ -25,7 +25,7 @@ export default function NavBarUtilisateur() {
     <AppBar position="fixed" sx={{ bgcolor: "common.white" }}>
         <Toolbar>
         <div id="logo" onClick={toAcceuil}>
-          <img src="/images/LogoONN.jpeg" alt="logo" />
+          <img src="/images/fop.jpg" alt="logo" />
         </div>
 
         <Typography

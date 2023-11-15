@@ -131,7 +131,7 @@ export default function ListeMateriel() {
   };
   return (
     <>
-    <NavBarAdmin></NavBarAdmin>
+    <NavBarAdmin titre="Liste des matériels"></NavBarAdmin>
     <Box style={{ marginLeft: 300,marginTop: 130 }}>
     <Box display="flex" flexDirection="row" flexWrap="wrap" justifyContent="space-around">{/* recherche et radiogroup */}
       <div id="search" style={{ marginBottom: 20, width:"300px" }}>
