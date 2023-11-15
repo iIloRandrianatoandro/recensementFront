@@ -52,7 +52,6 @@ export default function App() {
   const [materielFilter, setMaterielFilter] = useState([]);
   const [nomenclature, setNomenclature] = useState([]);
   const [nomenclatureSelectionne, setNomenclatureSelectionne] = useState(3);
-  
 
     const changerNomenclature=(e)=>{
       //console.log(e.target.value)
@@ -140,9 +139,9 @@ export default function App() {
   return (<>
     <NavBarUtilisateur></NavBarUtilisateur>
       <Box  style={{ marginLeft: 100,marginTop: 180 }} >{/* body */}
-      <Box display="flex" flexDirection="row" flexWrap="wrap" justifyContent="space-around">{/* recherche et radiogroup */}
+      <Box display="flex" flexDirection="row" flexWrap="wrap" justifyContent="space-between" sx={{ maxWidth:470 }}>{/* recherche et radiogroup */}
       <div id="search" style={{ marginBottom: 20, width:200 }} >
-        <Search sx={{ width: 20, }} ></Search>
+        <Search sx={{ width: 20 }} ></Search>
       <Search>
         <SearchIconWrapper>
           <SearchIcon sx={{ color: "common.white" }} />

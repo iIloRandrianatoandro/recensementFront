@@ -116,10 +116,6 @@ export default function RecenserMateriel() {
         setExistantApresEcriture(recensement.existantApresEcriture)
       })
       .catch(err=>{console.log(err);setErreur(true)})
-      /*const response = await axios.get(`${baseUrl}/voirRecensement/${id}`);
-      const recensement= response.data[0]
-      setDesignation(recensement.designation);
-      setExistantApresEcriture(recensement.existantApresEcriture)*/
     };
     getRecensementById();
   },[id])
