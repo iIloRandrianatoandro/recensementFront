@@ -14,6 +14,7 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import PropTypes from 'prop-types';
 import { useEffect } from "react";
+import { Box } from '@mui/material';
 
 import axios from "axios";
 
@@ -97,17 +98,18 @@ export default function ModifierMateriel() {
     <Dialog
     open={modifier}//la boite de dialogie s'ouvre quand recenser==true
     >
-    <BootstrapDialogTitle id="customized-dialog-title" onClose={fermerFenetre}>
+    <BootstrapDialogTitle id="customized-dialog-title" onClose={fermerFenetre}sx={{ color: 'black' }}>
     Modifier le matériel
     </BootstrapDialogTitle>
     <DialogContent dividers>
-      <form onSubmit={modifierMateriel} style={{ display: "flex", flexDirection: "column", gap: "10px"}}>
+      <form onSubmit={modifierMateriel} style={{ display: "flex", flexDirection: "column", gap: "20px", width: "500px", maxWidth: "md", height: "400px", maxHeight: "md", marginTop:20 }}>
         <FormLabel>Nomenclature</FormLabel>
         <TextField
           id="standard-required"
           variant="standard"
           value={nomenclature}
           onChange={(e) => setNomenclature(e.target.value)}
+          required
         />
         <FormLabel>Désignation</FormLabel>
         <TextField
@@ -115,6 +117,7 @@ export default function ModifierMateriel() {
           variant="standard"
           value={designation}
           onChange={(e) => setDesignation(e.target.value)}
+          required
         />
         <FormLabel>Espece Unite</FormLabel>
         <TextField
@@ -122,23 +125,29 @@ export default function ModifierMateriel() {
           variant="standard"
           value={especeUnite}
           onChange={(e) => setEspeceUnite(e.target.value)}
+          required
         />
+        <Box style={{ display: "flex", flexDirection: "row", gap: "10px",marginTop:30}}>
         <Button
-          variant="contained"
-          type="submit"
-          color="success"
-          sx={{ color:'black'}}
-        >
-          Modifier
-        </Button>
-        <Button
+          style={{width:"50%"}}
           variant="contained"
           type="button"
-          sx={{bgcolor:'yellow', color:'black'}}
+          sx={{ bgcolor: 'grey', color: 'black' }}
           onClick={fermerFenetre}
         >
           Annuler
         </Button>
+        <Button
+          style={{width:"50%"}}
+          variant="contained"
+          type="submit"
+          color="success"
+          sx={{ color: 'black' }}
+        >
+          Modifier
+        </Button>
+        </Box>
+        
       </form>
     </DialogContent>
     </Dialog>
