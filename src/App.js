@@ -23,6 +23,7 @@ import "./style/index.css";
 import AdminRouteProtege from "./components/AdminRouteProtege";
 import UtilisateurRouteProtege from "./components/UtilisateurRouteProtege";
 import NavBarAdmin from "./components/NavBarAdmin";
+import AutoRefresh from "./components/AutoRefresh";
 
 function App() {
   const location = useLocation();
@@ -54,7 +55,4 @@ function App() {
     </ThemeProvider>
   );
 }
-const styles = ({ fontFamily }) => ({
-  fontFamily: "Roboto",
-});
 export default App;

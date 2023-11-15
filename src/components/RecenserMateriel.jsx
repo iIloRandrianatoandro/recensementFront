@@ -14,6 +14,7 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import PropTypes from 'prop-types';
 import { useEffect } from "react";
+import { Box } from '@mui/material';
 
 import axios from "axios";
 
@@ -105,10 +106,20 @@ export default function RecenserMateriel() {
   useEffect(()=>{
     //recuperer les informations du recensement pour les afficher
     const getRecensementById=async()=>{
-      const response = await axios.get(`${baseUrl}/voirRecensement/${id}`);
+      await axios.request({
+        url: `${baseUrl}/voirRecensement/${id}`,
+        method:"GET",           
+      })
+      .then(res=>{
+        const recensement= res.data[0]
+        setDesignation(recensement.designation);
+        setExistantApresEcriture(recensement.existantApresEcriture)
+      })
+      .catch(err=>{console.log(err);setErreur(true)})
+      /*const response = await axios.get(`${baseUrl}/voirRecensement/${id}`);
       const recensement= response.data[0]
       setDesignation(recensement.designation);
-      setExistantApresEcriture(recensement.existantApresEcriture)
+      setExistantApresEcriture(recensement.existantApresEcriture)*/
     };
     getRecensementById();
   },[id])
@@ -117,11 +128,11 @@ export default function RecenserMateriel() {
     <Dialog
     open={recenser}//la boite de dialogie s'ouvre quand recenser==true
     >
-    <BootstrapDialogTitle id="customized-dialog-title" onClose={fermerFenetre}>
+    <BootstrapDialogTitle id="customized-dialog-title" onClose={fermerFenetre} sx={{ color: 'black' }}>
     Recenser le matériel
     </BootstrapDialogTitle>
     <DialogContent dividers>
-      <form onSubmit={recenserMateriel} style={{ display: "flex", flexDirection: "column", gap: "10px"}}>
+      <form onSubmit={recenserMateriel} style={{ display: "flex", flexDirection: "column", gap: "10px", width: "500px", maxWidth: "md"}}>
         <FormLabel>Désignation</FormLabel>
         <TextField
           id="standard-required"
@@ -162,22 +173,28 @@ export default function RecenserMateriel() {
           variant="standard"
           onChange={(e) => setObservation(e.target.value)}
         />
+        
+        <Box style={{ display: "flex", flexDirection: "row", gap: "10px",marginTop:10}}>
         <Button
-          variant="contained"
-          type="submit"
-          color="success"
-          sx={{ color:'black'}}
-        >
-          Recenser
-        </Button>
-        <Button
+          style={{width:"50%"}}
           variant="contained"
           type="button"
-          sx={{bgcolor:'yellow', color:'black'}}
+          sx={{ bgcolor: 'grey', color: 'black' }}
           onClick={fermerFenetre}
         >
           Annuler
         </Button>
+        <Button
+          style={{width:"50%"}}
+          variant="contained"
+          type="submit"
+          color="success"
+          sx={{ color: 'black' }}
+        >
+          Recenser
+        </Button>
+        </Box>
+        
       </form>
     </DialogContent>
     </Dialog>
@@ -188,14 +205,14 @@ export default function RecenserMateriel() {
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
-          <DialogTitle id="alert-dialog-title">Succès</DialogTitle>
-          <DialogContent>
+          <DialogTitle id="alert-dialog-title"sx={{ backgroundColor: '#4CAF50', color: 'white' }}>Succès</DialogTitle>
+          <DialogContent sx={{marginTop:6}}>
             <DialogContentText id="alert-dialog-description">
               Recensement effectué avec succès
             </DialogContentText>
           </DialogContent>
-          <DialogActions>
-            <Button onClick={() => {setRecensementEffectuer(false);navigate('/pageUtilisateur')}} autoFocus>
+          <DialogActions sx={{ justifyContent: 'center' }}>
+            <Button onClick={() => {setRecensementEffectuer(false);navigate('/pageUtilisateur')}} autoFocus sx={{ backgroundColor: '#4CAF50', color: 'white' }}>
               OK
             </Button>
           </DialogActions>
@@ -209,14 +226,14 @@ export default function RecenserMateriel() {
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
-          <DialogTitle id="alert-dialog-title">Erreur</DialogTitle>
-          <DialogContent>
+          <DialogTitle id="alert-dialog-title" sx={{ backgroundColor: '#f44336', color: 'white' }}>Erreur</DialogTitle>
+          <DialogContent sx={{marginTop:6}}>
             <DialogContentText id="alert-dialog-description">
               Il y a une erreur pendant le recensement du matériel
             </DialogContentText>
           </DialogContent>
-          <DialogActions>
-            <Button onClick={() => {setErreur(false);navigate('/pageUtilisateur')}} autoFocus>
+          <DialogActions sx={{ justifyContent: 'center' }}>
+            <Button onClick={() => {setErreur(false);navigate('/pageUtilisateur')}}  autoFocus sx={{ backgroundColor: '#f44336', color: 'white' }}>
             OK
             </Button>
           </DialogActions>

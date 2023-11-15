@@ -14,6 +14,7 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import PropTypes from 'prop-types';
 import { useEffect } from "react";
+import { Box } from '@mui/material';
 
 import axios from "axios";
 
@@ -84,14 +85,14 @@ export default function CreerUtilisateur() {
   }
   return (
     <>
-    <Dialog
-    open={creer}//la boite de dialogie s'ouvre quand recenser==true
+    <Dialog 
+    open={creer}//la boite de dialogie s'ouvre quand creer==true
     >
-    <BootstrapDialogTitle id="customized-dialog-title" onClose={fermerFenetre}>
+    <BootstrapDialogTitle id="customized-dialog-title" onClose={fermerFenetre} sx={{ color: 'black' }}>
     Créer un nouvel utilisateur
     </BootstrapDialogTitle>
     <DialogContent dividers>
-      <form onSubmit={creerUtilisateur} style={{ display: "flex", flexDirection: "column", gap: "10px"}}>
+      <form onSubmit={creerUtilisateur} style={{ display: "flex", flexDirection: "column", gap: "20px", width: "500px", maxWidth: "md", height: "400px", maxHeight: "md", marginTop:20 }}>
         <FormLabel>Nom</FormLabel>
         <TextField
           id="standard-required"
@@ -115,22 +116,27 @@ export default function CreerUtilisateur() {
           required
           onChange={(e) => setPassword(e.target.value)}
         />
+        <Box style={{ display: "flex", flexDirection: "row", gap: "10px",marginTop:30}}>
         <Button
-          variant="contained"
-          type="submit"
-          color="success"
-          sx={{ color:'black'}}
-        >
-          Créer
-        </Button>
-        <Button
+          style={{width:"50%"}}
           variant="contained"
           type="button"
-          sx={{bgcolor:'yellow', color:'black'}}
+          sx={{ bgcolor: 'grey', color: 'black' }}
           onClick={fermerFenetre}
         >
           Annuler
         </Button>
+        <Button
+          style={{width:"50%"}}
+          variant="contained"
+          type="submit"
+          color="success"
+          sx={{ color: 'black' }}
+        >
+          Créer
+        </Button>
+
+        </Box>
       </form>
     </DialogContent>
     </Dialog>
@@ -141,17 +147,18 @@ export default function CreerUtilisateur() {
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
-          <DialogTitle id="alert-dialog-title">Succès</DialogTitle>
-          <DialogContent>
+          <DialogTitle id="alert-dialog-title"sx={{ backgroundColor: '#4CAF50', color: 'white' }}>Succès</DialogTitle>
+          <DialogContent sx={{marginTop:6}}>
             <DialogContentText id="alert-dialog-description">
               Utilisateur créé avec succès
             </DialogContentText>
           </DialogContent>
-          <DialogActions>
-            <Button onClick={() => {setUtilisateurCreer(false);navigate('/listerUtilisateur')}} autoFocus>
+          <DialogActions sx={{ justifyContent: 'center' }}>
+            <Button onClick={() => { setUtilisateurCreer(false); navigate('/listerUtilisateur') }} autoFocus sx={{ backgroundColor: '#4CAF50', color: 'white' }}>
               OK
             </Button>
           </DialogActions>
+
         </Dialog>
       </div>
       )}
@@ -162,14 +169,14 @@ export default function CreerUtilisateur() {
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
-          <DialogTitle id="alert-dialog-title">Erreur</DialogTitle>
-          <DialogContent>
+          <DialogTitle id="alert-dialog-title" sx={{ backgroundColor: '#f44336', color: 'white' }}>Erreur</DialogTitle>
+          <DialogContent sx={{marginTop:6}}>
             <DialogContentText id="alert-dialog-description">
               Il y a une erreur pendant la création de l'utilisateur
             </DialogContentText>
           </DialogContent>
-          <DialogActions>
-            <Button onClick={() => {setErreur(false);navigate('/listerUtilisateur')}} autoFocus>
+          <DialogActions sx={{ justifyContent: 'center' }}>
+            <Button onClick={() => {setErreur(false);navigate('/listerUtilisateur')}} autoFocus autoFocus sx={{ backgroundColor: '#f44336', color: 'white' }}>
             OK
             </Button>
           </DialogActions>
