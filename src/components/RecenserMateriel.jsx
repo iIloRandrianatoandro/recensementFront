@@ -201,14 +201,14 @@ export default function RecenserMateriel() {
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
-          <DialogTitle id="alert-dialog-title"sx={{ backgroundColor: '#4CAF50', color: 'white' }}>Succès</DialogTitle>
-          <DialogContent sx={{marginTop:6}}>
+          <DialogTitle id="alert-dialog-title">Succès</DialogTitle>
+          <DialogContent>
             <DialogContentText id="alert-dialog-description">
               Recensement effectué avec succès
             </DialogContentText>
           </DialogContent>
-          <DialogActions sx={{ justifyContent: 'center' }}>
-            <Button onClick={() => {setRecensementEffectuer(false);navigate('/pageUtilisateur')}} autoFocus sx={{ backgroundColor: '#4CAF50', color: 'white' }}>
+          <DialogActions>
+            <Button onClick={() => {setRecensementEffectuer(false);navigate('/pageUtilisateur')}} autoFocus>
               OK
             </Button>
           </DialogActions>
@@ -222,14 +222,14 @@ export default function RecenserMateriel() {
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
-          <DialogTitle id="alert-dialog-title" sx={{ backgroundColor: '#f44336', color: 'white' }}>Erreur</DialogTitle>
-          <DialogContent sx={{marginTop:6}}>
+          <DialogTitle id="alert-dialog-title" sx={{color:"red"}}>Erreur</DialogTitle>
+          <DialogContent>
             <DialogContentText id="alert-dialog-description">
               Il y a une erreur pendant le recensement du matériel
             </DialogContentText>
           </DialogContent>
-          <DialogActions sx={{ justifyContent: 'center' }}>
-            <Button onClick={() => {setErreur(false);navigate('/pageUtilisateur')}}  autoFocus sx={{ backgroundColor: '#f44336', color: 'white' }}>
+          <DialogActions>
+            <Button onClick={() => {setErreur(false);navigate('/pageUtilisateur')}}  autoFocus>
             OK
             </Button>
           </DialogActions>
