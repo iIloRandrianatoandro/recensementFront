@@ -28,7 +28,6 @@ export default function SeConnecter() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [notLogged, setNotLogged] = useState(false);
-    const [a, setA] = useState("a");
 
   
     const handleClose = () => {
@@ -61,34 +60,6 @@ export default function SeConnecter() {
             // Handle the error, e.g., set an error state or display a message
             setNotLogged(true);
           }
-          
-        /*await axios.post(`${baseUrl}/seConnecter`, {
-            email: email,
-            password: password,
-          })
-          .then(res=>{
-            console.log(res.data)
-            setNonExistant(true)
-            /*if (res.data === 'nonExistant') {
-            console.log(nonExistant)
-            setNonExistant(true);
-            console.log(nonExistant)
-          } else if (res.data["isAdmin"] === true) {
-            sessionStorage.setItem("isLogged", "true");
-            sessionStorage.setItem("isAdmin", "true");
-            sessionStorage.setItem("id", res.data["id"]);
-            navigate("/suivreFlux");
-          } else if (res.data["isAdmin"] === false) {
-            sessionStorage.setItem("isLogged", "true");
-            sessionStorage.setItem("isUser", "true");
-            sessionStorage.setItem("id", res.data["id"]);
-            navigate("/");
-          }
-        })
-          .catch(err =>{
-            console.error(err);
-            setNotLogged(true);
-          })*/
       };
     
   const [values, setValues] = useState({
@@ -165,7 +136,7 @@ export default function SeConnecter() {
                       aria-labelledby="alert-dialog-title"
                       aria-describedby="alert-dialog-description"
                     >
-                      <DialogTitle id="alert-dialog-title">
+                      <DialogTitle id="alert-dialog-title" sx={{color:"red"}}>
                         {"Echec de connexion"}
                       </DialogTitle>
                       <DialogContent>

@@ -242,24 +242,17 @@ export default function ImporterListe() {
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
-          <DialogTitle id="alert-dialog-title" sx={{ color: 'black' }}>Confirmation</DialogTitle>
-          <DialogContent>
+          <DialogTitle id="alert-dialog-title" >Confirmation</DialogTitle>
+          <DialogContent >
             <DialogContentText id="alert-dialog-description">
               Confirmer l'importation
             </DialogContentText>
           </DialogContent>
           <DialogActions>
-            <Button onClick={annulerImport}  sx={{ bgcolor: 'grey', color: 'black' }}
-            style={{width:"50%"}}
-            variant="contained"
-            type="button">
+            <Button onClick={annulerImport} >
               Annuler
             </Button>
-            <Button onClick={importerMateriel} autoFocus sx={{ color: 'black' }}
-            style={{width:"50%"}}
-            variant="contained"
-            type="submit"
-            color="success">
+            <Button onClick={importerMateriel} autoFocus>
               OK
             </Button>
           </DialogActions>

@@ -14,6 +14,7 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import PropTypes from 'prop-types';
 import { useEffect } from "react";
+import { Box } from '@mui/material';
 
 import axios from "axios";
 
@@ -97,11 +98,11 @@ export default function ModifierUtilisateur() {
     <Dialog
     open={modifier}//la boite de dialogie s'ouvre quand recenser==true
     >
-    <BootstrapDialogTitle id="customized-dialog-title" onClose={fermerFenetre}>
+    <BootstrapDialogTitle id="customized-dialog-title" onClose={fermerFenetre}sx={{ color: 'black' }}>
     Modifier l'utilisateur
     </BootstrapDialogTitle>
     <DialogContent dividers>
-      <form onSubmit={modifierUtilisateur} style={{ display: "flex", flexDirection: "column", gap: "10px"}}>
+      <form onSubmit={modifierUtilisateur}  style={{ display: "flex", flexDirection: "column", gap: "20px", width: "500px", maxWidth: "md", height: "400px", maxHeight: "md", marginTop:20 }}>
         <FormLabel>Nom</FormLabel>
         <TextField
           id="standard-required"
@@ -125,22 +126,27 @@ export default function ModifierUtilisateur() {
           required
           onChange={(e) => setPassword(e.target.value)}
         />
+        <Box style={{ display: "flex", flexDirection: "row", gap: "10px",marginTop:30}}>
         <Button
-          variant="contained"
-          type="submit"
-          color="success"
-          sx={{ color:'black'}}
-        >
-          Modifier
-        </Button>
-        <Button
+          style={{width:"50%"}}
           variant="contained"
           type="button"
-          sx={{bgcolor:'yellow', color:'black'}}
+          sx={{ bgcolor: 'grey', color: 'black' }}
           onClick={fermerFenetre}
         >
           Annuler
         </Button>
+        <Button
+          style={{width:"50%"}}
+          variant="contained"
+          type="submit"
+          color="success"
+          sx={{ color: 'black' }}
+        >
+          Modifier
+        </Button>
+
+        </Box>
       </form>
     </DialogContent>
     </Dialog>

@@ -147,14 +147,14 @@ export default function CreerUtilisateur() {
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
-          <DialogTitle id="alert-dialog-title"sx={{ backgroundColor: '#4CAF50', color: 'white' }}>Succès</DialogTitle>
-          <DialogContent sx={{marginTop:6}}>
+          <DialogTitle id="alert-dialog-title">Succès</DialogTitle>
+          <DialogContent >
             <DialogContentText id="alert-dialog-description">
               Utilisateur créé avec succès
             </DialogContentText>
           </DialogContent>
-          <DialogActions sx={{ justifyContent: 'center' }}>
-            <Button onClick={() => { setUtilisateurCreer(false); navigate('/listerUtilisateur') }} autoFocus sx={{ backgroundColor: '#4CAF50', color: 'white' }}>
+          <DialogActions>
+            <Button onClick={() => { setUtilisateurCreer(false); navigate('/listerUtilisateur') }} autoFocus>
               OK
             </Button>
           </DialogActions>
@@ -169,14 +169,14 @@ export default function CreerUtilisateur() {
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
-          <DialogTitle id="alert-dialog-title" sx={{ backgroundColor: '#f44336', color: 'white' }}>Erreur</DialogTitle>
-          <DialogContent sx={{marginTop:6}}>
+          <DialogTitle id="alert-dialog-title" sx={{  color: 'red' }}>Erreur</DialogTitle>
+          <DialogContent>
             <DialogContentText id="alert-dialog-description">
               Il y a une erreur pendant la création de l'utilisateur
             </DialogContentText>
           </DialogContent>
-          <DialogActions sx={{ justifyContent: 'center' }}>
-            <Button onClick={() => {setErreur(false);navigate('/listerUtilisateur')}} autoFocus autoFocus sx={{ backgroundColor: '#f44336', color: 'white' }}>
+          <DialogActions>
+            <Button onClick={() => {setErreur(false);navigate('/listerUtilisateur')}} >
             OK
             </Button>
           </DialogActions>
