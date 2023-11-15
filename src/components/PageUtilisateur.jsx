@@ -10,6 +10,7 @@ import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import NavBarUtilisateur from "./NavBarUtilisateur";
+import {Box} from "@mui/material";
 
 
 export default function App() {
@@ -138,7 +139,26 @@ export default function App() {
 
   return (<>
     <NavBarUtilisateur></NavBarUtilisateur>
-    <div style={{ height: 500, width: '100%',paddingTop:150}}>
+      <Box  style={{ marginLeft: 100,marginTop: 180 }} >{/* body */}
+      <Box display="flex" flexDirection="row" flexWrap="wrap" justifyContent="space-around" style={{ width:550 }}>{/* recherche et radiogroup */}
+      <div id="search" style={{ marginBottom: 20, width:200 }} >
+        <Search sx={{ width: 20, }} ></Search>
+      <Search>
+        <SearchIconWrapper>
+          <SearchIcon sx={{ color: "common.white" }} />
+        </SearchIconWrapper>
+        <StyledInputBase
+          placeholder="Recherche…"
+          inputProps={{ "aria-label": "recherche" }}
+          sx={{ color: "common.white" }}
+          onKeyDown={async(e)=>{
+            if (e.key==="Enter"){
+              handleSearchInputChange(e)
+            }
+          }}
+        />
+      </Search>
+      </div>
         {nomenclature.length > 0 && (
        <RadioGroup
        row
@@ -157,22 +177,8 @@ export default function App() {
        ))}
      </RadioGroup>
       )}
-      <Search>
-        <SearchIconWrapper>
-          <SearchIcon sx={{ color: "common.white" }} />
-        </SearchIconWrapper>
-        <StyledInputBase
-          placeholder="Recherche…"
-          inputProps={{ "aria-label": "recherche" }}
-          sx={{ color: "common.white" }}
-          onKeyDown={async(e)=>{
-            if (e.key==="Enter"){
-              handleSearchInputChange(e)
-            }
-          }}
-        />
-      </Search>
-      <DataGrid
+      </Box>
+      <DataGrid sx={{ height: 450, width: '80%' }}
         rows={materielFilter}
         columns={columns}
         getRowId={(row) => row.idRecensement}
@@ -184,7 +190,7 @@ export default function App() {
         locale="fr" // Correction ici
       />
 
-    </div>
+    </Box>
     </>
   );
 }

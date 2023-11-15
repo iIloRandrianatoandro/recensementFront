@@ -155,7 +155,7 @@ export default function SuivreFlux() {
         Importer la liste des matériels à recenser
         </Button>
     <FormControl style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-    <Box style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+    <Box style={{ display: 'flex', flexDirection: 'column', flex: 1, marginBottom: 20  }}>
       <FormLabel>Nombre total des matériels</FormLabel>
       <TextField
         id="standard-required"
@@ -183,20 +183,9 @@ export default function SuivreFlux() {
       />
     </Box>
   </FormControl>
-  
-      <RadioGroup
-        row
-        aria-labelledby="demo-row-radio-buttons-group-label"
-        name="row-radio-buttons-group"
-        value={typeListe}
-        onChange={changerTypeListe}
-      >
-        <FormControlLabel value="listeMateriel" control={<Radio />} label="Tous les matériels " />
-        <FormControlLabel value="listeMaterielRecense" control={<Radio />} label="Materiels recensés" />
-        <FormControlLabel value="listeMaterielARecense" control={<Radio />} label="Matériels à recenser" />
-      </RadioGroup>
+  <Box display="flex" flexDirection="row" flexWrap="wrap" justifyContent="space-around" >{/* recherche et radiogroup */}
       <div id="search" style={{ marginBottom: 20 }}>
-        <Search sx={{ width: 300, }} >
+        <Search sx={{ width: 300 }} >
           <SearchIconWrapper>
             <SearchIcon sx={{ color: "common.white" }} />
           </SearchIconWrapper>
@@ -212,6 +201,18 @@ export default function SuivreFlux() {
           />
         </Search>
       </div>
+      <RadioGroup
+        row
+        aria-labelledby="demo-row-radio-buttons-group-label"
+        name="row-radio-buttons-group"
+        value={typeListe}
+        onChange={changerTypeListe}
+      >
+        <FormControlLabel value="listeMateriel" control={<Radio />} label="Tous les matériels " />
+        <FormControlLabel value="listeMaterielRecense" control={<Radio />} label="Materiels recensés" />
+        <FormControlLabel value="listeMaterielARecense" control={<Radio />} label="Matériels à recenser" />
+      </RadioGroup>
+    </Box>
       <DataGrid  sx={{ height: 450, width: '100%' }}
         rows={rows}
         columns={columns}

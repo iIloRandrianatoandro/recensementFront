@@ -132,26 +132,9 @@ export default function ListeMateriel() {
   return (
     <>
     <NavBarAdmin></NavBarAdmin>
-    <Box style={{ marginLeft: 300,marginTop: 110 }}>
-        {nomenclature.length > 0 && (
-       <RadioGroup
-       row
-       aria-labelledby="demo-row-radio-buttons-group-label"
-       name="row-radio-buttons-group"
-       value={nomenclatureSelectionne}
-       onChange={changerNomenclature}
-      >
-       {nomenclature.map((nomenclatureItem) => (
-         <FormControlLabel
-           value={nomenclatureItem}
-           key={nomenclatureItem}
-           control={<Radio />}
-           label={nomenclatureItem}
-         />
-       ))}
-     </RadioGroup>
-      )}
-      <div id="search" style={{ marginBottom: 20 }}>
+    <Box style={{ marginLeft: 300,marginTop: 130 }}>
+    <Box display="flex" flexDirection="row" flexWrap="wrap" justifyContent="space-around">{/* recherche et radiogroup */}
+      <div id="search" style={{ marginBottom: 20, width:"300px" }}>
       <Search sx={{ width: 300, }}>
         <SearchIconWrapper>
           <SearchIcon sx={{ color: "common.white" }} />
@@ -168,6 +151,27 @@ export default function ListeMateriel() {
         />
       </Search>
         </div>
+        {nomenclature.length > 0 && (
+       <RadioGroup style={{ marginBottom: 20, width:"300px" }}
+       row
+       aria-labelledby="demo-row-radio-buttons-group-label"
+       name="row-radio-buttons-group"
+       value={nomenclatureSelectionne}
+       onChange={changerNomenclature}
+      >
+       {nomenclature.map((nomenclatureItem) => (
+         <FormControlLabel
+           value={nomenclatureItem}
+           key={nomenclatureItem}
+           control={<Radio />}
+           label={nomenclatureItem}
+         />
+       ))}
+     </RadioGroup>
+      )}
+
+      
+    </Box>
       <DataGrid sx={{ height: 500, width: '90%' }}
         rows={materielFilter}
         columns={columns}

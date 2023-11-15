@@ -222,11 +222,10 @@ export default function Recapitulatif() {
     <>
       <NavBarAdmin></NavBarAdmin>
       <Box  style={{ marginLeft: 250,marginTop: 115 }} >{/* body */}
-        <Box display="flex" flexDirection="row" flexWrap="wrap" justifyContent="space-around" style={{ marginBottom: 20 }}>
+        <Box display="flex" flexDirection="row" flexWrap="wrap" justifyContent="space-around" style={{ marginBottom: 20, marginTop:100 }}>
           <Box>{/* recap */}
-            <Box  >{/* annee et generer excel */}
-              <InputLabel id="demo-simple-select-label">Annee</InputLabel>
-              <Box display="flex" flexDirection="row" flexWrap="wrap" justifyContent="space-around" >{/* annee */}
+            <Box  >{/* annee */}
+              <InputLabel id="demo-simple-select-label">Annee</InputLabel>{/* annee */}
                 <Box>
                   {anneeExistante.length > 0 && (
                   <Select
@@ -244,16 +243,6 @@ export default function Recapitulatif() {
                   </Select>
                   )}
                 </Box>
-                <Box>{/* generer excel */}
-                  <Button
-                    variant="contained"
-                    color="primary" 
-                    onClick={() => genererExcel(annee)}
-                  >
-                      Générer un fichier Excel
-                  </Button>    
-                </Box>
-              </Box>
             </Box>
             <Box>{/* formulaire */}
               <FormControl>
@@ -295,7 +284,16 @@ export default function Recapitulatif() {
               </FormControl>
             </Box>
           </Box>
-          <Box>{/* tableau par nomenclature */}
+          <Box>{/* tableau par nomenclature et bouton generer excel*/}
+                <Box  style={{ marginBottom: 20}}>{/* generer excel */}
+                  <Button
+                    variant="contained"
+                    color="primary" 
+                    onClick={() => genererExcel(annee)}
+                  >
+                      Générer un fichier Excel
+                  </Button>    
+                </Box>
             <DataGrid sx={{ height: 250, width: '100%' }}
               rows={rows2}
               columns={columns2}
