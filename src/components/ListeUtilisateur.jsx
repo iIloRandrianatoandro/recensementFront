@@ -49,7 +49,7 @@ export default function ListeUtilisateur() {
   const navigate = useNavigate();
   //titre des colonnes du tableau
   const columns = [
-    { field: 'name', headerName: 'Nom',  sortable: false, filterable: true, hideable: false, columnManageable: false },
+    { field: 'name', headerName: 'Nom',  sortable: false, filterable: false, disableColumnMenu: true,hideable: false, columnManageable: false },
     { field: 'email', headerName: 'Mail',  sortable: false, filterable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
     {
       field: 'modifier',

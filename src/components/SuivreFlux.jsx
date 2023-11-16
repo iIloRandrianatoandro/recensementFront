@@ -49,13 +49,13 @@ export default function SuivreFlux() {
     //titre des colonnes du tableau
   const columns = [
     { field: 'recense', headerName: 'Recense',  filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
-    { field: 'nomenclature', headerName: 'Nomenclature',  sortable: false, filterable: true, hideable: false, columnManageable: false },
-    { field: 'designation', headerName: 'Désignation',  sortable: false, filterable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
-    { field: 'existantApresEcriture', headerName: 'Existant apres écriture',  filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
-    { field: 'deficitParArticle', headerName: 'Déficit par article',  filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
-    { field: 'excedentParArticle', headerName: 'Excedent apres écriture',  filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
-    { field: 'prixUnite', headerName: 'Prix unitaire',  filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
-    { field: 'observation', headerName: 'Observation',  filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
+    { field: 'nomenclature', headerName: 'Nomenclature',width:1,  sortable: false, filterable: false, disableColumnMenu: true,hideable: false, columnManageable: false },
+    { field: 'designation', headerName: 'Désignation',width:500,renderCell: (params) => ( <div style={{ whiteSpace: 'pre-line' }}> {params.value}</div>),sortable: false, filterable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
+    { field: 'existantApresEcriture', headerName: 'Existant apres écriture', width:1, filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
+    { field: 'deficitParArticle', headerName: 'Déficit par article',  width:1, filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
+    { field: 'excedentParArticle', headerName: 'Excedent apres écriture', width:1,  filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
+    { field: 'prixUnite', headerName: 'Prix unitaire', width:130,  filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
+    { field: 'observation', headerName: 'Observation',width:100,  filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
     
   ];
     //url du backend
@@ -146,16 +146,16 @@ export default function SuivreFlux() {
   return (
     <>
     <NavBarAdmin titre="Recensement en cours"></NavBarAdmin>
-      <Box  style={{ marginLeft: 250,marginTop: 115 }} >{/* body */}
+      <Box  style={{ marginLeft: 250,marginTop: 100 }} >{/* body */}
       <Button
-      style={{ marginBottom: 20 }}
+      style={{ marginBottom: 10 }}
         variant="contained"
         color="primary" 
         onClick={() => importer()}>
         Importer la liste des matériels à recenser
         </Button>
     <FormControl style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
-    <Box style={{ display: 'flex', flexDirection: 'column', flex: 1, marginBottom: 20  }}>
+    <Box style={{ display: 'flex', flexDirection: 'column', flex: 1, marginBottom: 10  }}>
       <FormLabel>Nombre total des matériels</FormLabel>
       <TextField
         id="standard-required"
@@ -184,7 +184,7 @@ export default function SuivreFlux() {
     </Box>
   </FormControl>
   <Box display="flex" flexDirection="row" flexWrap="wrap" justifyContent="space-around" >{/* recherche et radiogroup */}
-      <div id="search" style={{ marginBottom: 20 }}>
+      <div id="search" style={{ marginBottom: 10 }}>
         <Search sx={{ width: 300 }} >
           <SearchIconWrapper>
             <SearchIcon sx={{ color: "common.white" }} />

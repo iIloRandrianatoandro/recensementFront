@@ -45,7 +45,7 @@ export default function ListeMateriel() {
   const navigate = useNavigate();
   //titre des colonnes du tableau
   const columns = [
-    { field: 'nomenclature', headerName: 'Nomenclature',  sortable: false, filterable: true, hideable: false, columnManageable: false },
+    { field: 'nomenclature', headerName: 'Nomenclature',  sortable: false, filterable: false,disableColumnMenu: true, hideable: false, columnManageable: false },
     { field: 'designation', headerName: 'Désignation',  sortable: false, filterable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
     { field: 'especeUnite', headerName: 'Espece unité',  filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
     {
