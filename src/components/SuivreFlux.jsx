@@ -55,7 +55,7 @@ export default function SuivreFlux() {
     { field: 'existantApresEcriture', headerName: 'Existant apres écriture', width:70,renderHeader: () => ( <div style={{ whiteSpace: 'pre-line', lineHeight: '1.3em'  }}> {'Existant apres écriture'}</div>), filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
     { field: 'deficitParArticle', headerName: 'Déficit par article', width:60,renderHeader: () => ( <div style={{ whiteSpace: 'pre-line', lineHeight: '1.3em'  }}> {'Déficit par article'}</div>), filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
     { field: 'excedentParArticle', headerName: 'Excedent apres écriture',  width:78,renderHeader: () => ( <div style={{ whiteSpace: 'pre-line', lineHeight: '1.3em'  }}> {'Excédent par article'}</div>), filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
-    { field: 'prixUnite', headerName: 'Prix unitaire', width:130,  filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
+    { field: 'prixUnite', headerName: 'Prix unitaire', width:120,  filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
     { field: 'observation', headerName: 'Observation',width:100,  filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
     
   ];
@@ -223,7 +223,6 @@ export default function SuivreFlux() {
         onPageChange={(newPage) => setPage(newPage)}
         pageSizeOptions={[30, 60, 100]}
         onPageSizeChange={changerNombreLigneParPage}
-        headerHeight={0}
         localeText={{
           noRowsLabel: 'Aucune ligne',
           page: 'Page',

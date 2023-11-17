@@ -80,16 +80,16 @@ export default function Recapitulatif() {
 
   //titre des colonnes du premie tableau des recensements
   const columns = [
-    { field: 'designation', headerName: 'Désignation',  sortable: false, filterable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
-    { field: 'especeUnite', headerName: 'Espèce unite',  sortable: false, filterable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
-    { field: 'prixUnite', headerName: 'Prix unitaire',  filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
-    { field: 'existantApresEcriture', headerName: 'Existant apres écriture',  filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
-    { field: 'deficitParArticle', headerName: 'Déficit par article',  filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
-    { field: 'valeurDeficit', headerName: 'Valeur des déficits',  filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
-    { field: 'excedentParArticle', headerName: 'Excedent apres écriture',  filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
-    { field: 'valeurExcedent', headerName: 'Valeur des excédents',  filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
-    { field: 'constateesParRecensement', headerName: 'Constatés par recensement',  filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
-    { field: 'valeurExistant', headerName: 'Valeur des existants',  filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
+    { field: 'designation', headerName: 'Désignation',width:350,renderCell: (params) => ( <div style={{ whiteSpace: 'pre-line',height:'auto' }}> {params.value}</div>),  sortable: false, filterable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
+    { field: 'especeUnite', headerName: 'Espèce unite', width:70,renderHeader: () => ( <div style={{ whiteSpace: 'pre-line', lineHeight: '1.3em'  }}> {'Espèce unite'}</div>), sortable: false, filterable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
+    { field: 'prixUnite', headerName: 'Prix unitaire', width:120, filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
+    { field: 'existantApresEcriture', headerName: 'Existant apres écriture', width:70,renderHeader: () => ( <div style={{ whiteSpace: 'pre-line', lineHeight: '1.3em'  }}> {'Existant apres écriture'}</div>),  filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
+    { field: 'deficitParArticle', headerName: 'Déficit par article',width:60,renderHeader: () => ( <div style={{ whiteSpace: 'pre-line', lineHeight: '1.3em'  }}> {'Déficit par article'}</div>),  filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
+    { field: 'valeurDeficit', headerName: 'Valeur des déficits',width:120,renderHeader: () => ( <div style={{ whiteSpace: 'pre-line', lineHeight: '1.3em'  }}> {'Valeur des déficits'}</div>),  filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
+    { field: 'excedentParArticle', headerName: 'Excedent apres écriture', width:78,renderHeader: () => ( <div style={{ whiteSpace: 'pre-line', lineHeight: '1.3em'  }}> {'Excédent par article'}</div>), filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
+    { field: 'valeurExcedent', headerName: 'Valeur des excédents', width:120,renderHeader: () => ( <div style={{ whiteSpace: 'pre-line', lineHeight: '1.3em'  }}> {'Valeur des excédents'}</div>), filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
+    { field: 'constateesParRecensement', headerName: 'Constatés par recensement',  width:110,renderHeader: () => ( <div style={{ whiteSpace: 'pre-line', lineHeight: '1.3em'  }}> {'Constatés par recensement'}</div>), filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
+    { field: 'valeurExistant', headerName: 'Valeur des existants', width:120,renderHeader: () => ( <div style={{ whiteSpace: 'pre-line', lineHeight: '1.3em'  }}> {'Valeur des existants'}</div>),  filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
     { field: 'observation', headerName: 'Observation',  filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },{
       field: 'recenser',
       headerName: '',
@@ -116,11 +116,11 @@ export default function Recapitulatif() {
   };
   //titre des colonnes du premie tableau des recensements
   const columns2 = [
-    { field: 'nomenclature', headerName: 'Nomenclature',  sortable: false, filterable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
-    { field: 'valeurExcedent', headerName: 'Excedent (valeur)',  sortable: false, filterable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
-    { field: 'valeurDeficit', headerName: 'Deficit (valeur)',  filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
-    { field: 'valeurExistant', headerName: 'Existant (valeur)',  filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
-    { field: 'nbArticle', headerName: 'Article (nombre)',  filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
+    { field: 'nomenclature', headerName: 'Nomenclature',width:112,  sortable: false, filterable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
+    { field: 'valeurExcedent', headerName: 'Excedent',  sortable: false, filterable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
+    { field: 'valeurDeficit', headerName: 'Deficit',  filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
+    { field: 'valeurExistant', headerName: 'Existant',  filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
+    { field: 'nbArticle', headerName: 'Article',  filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
         
   ];
 
@@ -294,11 +294,11 @@ export default function Recapitulatif() {
                       Générer un fichier Excel
                   </Button>    
                 </Box>
-            <DataGrid sx={{ height: 250, width: '100%' }}
+            <DataGrid sx={{ height: 'auto', width: '100%' }}
               rows={rows2}
               columns={columns2}
               getRowId={(row) => row.nomenclature}
-              hideFooterPagination
+              hideFooter
             />
           </Box>
         </Box>

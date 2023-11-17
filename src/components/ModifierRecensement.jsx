@@ -14,6 +14,7 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import PropTypes from 'prop-types';
 import { useEffect } from "react";
+import { Box } from '@mui/system';
 
 import axios from "axios";
 
@@ -113,11 +114,11 @@ export default function ModifierRecensement() {//url du backend
     <Dialog
     open={modifier}//la boite de dialogie s'ouvre quand recenser==true
     >
-    <BootstrapDialogTitle id="customized-dialog-title" onClose={fermerFenetre}>
+    <BootstrapDialogTitle id="customized-dialog-title" onClose={fermerFenetre} sx={{ color: 'black' }}>
     Modifier le recensement
     </BootstrapDialogTitle>
     <DialogContent dividers>
-      <form onSubmit={modifierRecensement} style={{ display: "flex", flexDirection: "column", gap: "10px"}}>
+      <form onSubmit={modifierRecensement} style={{ display: "flex", flexDirection: "column", gap: "10px", width: "500px", maxWidth: "md"}}>
         <FormLabel>Désignation</FormLabel>
         <TextField
           id="standard-required"
@@ -158,22 +159,27 @@ export default function ModifierRecensement() {//url du backend
           variant="standard"
           onChange={(e) => setObservation(e.target.value)}
         />
-        <Button
-          variant="contained"
-          type="submit"
-          color="success"
-          sx={{ color:'black'}}
-        >
-          Modifier
-        </Button>
-        <Button
-          variant="contained"
-          type="button"
-          sx={{bgcolor:'yellow', color:'black'}}
-          onClick={fermerFenetre}
-        >
-          Annuler
-        </Button>
+        <Box style={{ display: "flex", flexDirection: "row", gap: "10px",marginTop:10}}>
+          <Button
+            style={{width:"50%"}}
+            variant="contained"
+            type="button"
+            sx={{ bgcolor: 'grey', color: 'black' }}
+            onClick={fermerFenetre}
+          >
+            Annuler
+          </Button>
+          <Button
+            style={{width:"50%"}}
+            variant="contained"
+            type="submit"
+            color="success"
+            sx={{ color: 'black' }}
+          >
+            Modifier
+          </Button>
+        </Box>
+        
       </form>
     </DialogContent>
     </Dialog>
@@ -205,7 +211,7 @@ export default function ModifierRecensement() {//url du backend
           aria-labelledby="alert-dialog-title"
           aria-describedby="alert-dialog-description"
         >
-          <DialogTitle id="alert-dialog-title">Erreur</DialogTitle>
+          <DialogTitle id="alert-dialog-title" sx={{color:"red"}}>Erreur</DialogTitle>
           <DialogContent>
             <DialogContentText id="alert-dialog-description">
               Il y a une erreur pendant la modification du recensement
