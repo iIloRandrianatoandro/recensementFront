@@ -12,6 +12,7 @@ import { DataGrid } from '@mui/x-data-grid';
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
+import "../style/grid.css";
 
 import axios from "axios";
 import NavBarAdmin from './NavBarAdmin';
@@ -48,12 +49,12 @@ import NavBarAdmin from './NavBarAdmin';
 export default function SuivreFlux() {
     //titre des colonnes du tableau
   const columns = [
-    { field: 'recense', headerName: 'Recense',  filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
-    { field: 'nomenclature', headerName: 'Nomenclature',width:1,  sortable: false, filterable: false, disableColumnMenu: true,hideable: false, columnManageable: false },
-    { field: 'designation', headerName: 'Désignation',width:500,renderCell: (params) => ( <div style={{ whiteSpace: 'pre-line' }}> {params.value}</div>),sortable: false, filterable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
-    { field: 'existantApresEcriture', headerName: 'Existant apres écriture', width:1, filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
-    { field: 'deficitParArticle', headerName: 'Déficit par article',  width:1, filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
-    { field: 'excedentParArticle', headerName: 'Excedent apres écriture', width:1,  filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
+    { field: 'recense', headerName: 'Recense',width:75, filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
+    { field: 'nomenclature', headerName: 'Nomenclature',width:112,  sortable: false, filterable: false, disableColumnMenu: true,hideable: false, columnManageable: false },
+    { field: 'designation', headerName: 'Désignation',width:450,renderCell: (params) => ( <div style={{ whiteSpace: 'pre-line' }}> {params.value}</div>),sortable: false, filterable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
+    { field: 'existantApresEcriture', headerName: 'Existant apres écriture', width:70,renderHeader: () => ( <div style={{ whiteSpace: 'pre-line', lineHeight: '1.3em'  }}> {'Existant apres écriture'}</div>), filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
+    { field: 'deficitParArticle', headerName: 'Déficit par article', width:60,renderHeader: () => ( <div style={{ whiteSpace: 'pre-line', lineHeight: '1.3em'  }}> {'Déficit par article'}</div>), filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
+    { field: 'excedentParArticle', headerName: 'Excedent apres écriture',  width:78,renderHeader: () => ( <div style={{ whiteSpace: 'pre-line', lineHeight: '1.3em'  }}> {'Excédent par article'}</div>), filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
     { field: 'prixUnite', headerName: 'Prix unitaire', width:130,  filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
     { field: 'observation', headerName: 'Observation',width:100,  filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
     
@@ -147,7 +148,7 @@ export default function SuivreFlux() {
     <>
     <NavBarAdmin titre="Recensement en cours"></NavBarAdmin>
       <Box  style={{ marginLeft: 250,marginTop: 100 }} >{/* body */}
-      <Button
+      <Button 
       style={{ marginBottom: 10 }}
         variant="contained"
         color="primary" 
@@ -222,7 +223,12 @@ export default function SuivreFlux() {
         onPageChange={(newPage) => setPage(newPage)}
         pageSizeOptions={[30, 60, 100]}
         onPageSizeChange={changerNombreLigneParPage}
-        locale="fr" // Correction ici
+        headerHeight={0}
+        localeText={{
+          noRowsLabel: 'Aucune ligne',
+          page: 'Page',
+          rowsPerPage: 'Lignes par page', // Traduction pour "Row per page"
+        }}
       />
       </Box>
     </>
