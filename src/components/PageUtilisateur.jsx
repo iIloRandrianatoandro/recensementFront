@@ -18,9 +18,9 @@ export default function App() {
   const navigate = useNavigate();
   //titre des colonnes du tableau
   const columns = [
-    { field: 'nomenclature', headerName: 'Nomenclature',  sortable: false, filterable: false, disableColumnMenu: true,hideable: false, columnManageable: false },
-    { field: 'designation', headerName: 'Désignation',  sortable: false, filterable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
-    { field: 'existantApresEcriture', headerName: 'Existant apres écriture',  filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
+    { field: 'nomenclature', headerName: 'Nomenclature', width:112, sortable: false, filterable: false, disableColumnMenu: true,hideable: false, columnManageable: false },
+    { field: 'designation', headerName: 'Désignation',width:650,renderCell: (params) => ( <div style={{ whiteSpace: 'pre-line' }}> {params.value}</div>),  sortable: false, filterable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
+    { field: 'existantApresEcriture', headerName: 'Existant apres écriture', width:120,renderHeader: () => ( <div style={{ whiteSpace: 'pre-line', lineHeight: '1.3em'  }}> {'Existant apres écriture'}</div>), filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
     {
       field: 'recenser',
       headerName: '',

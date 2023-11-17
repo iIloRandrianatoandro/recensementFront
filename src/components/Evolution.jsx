@@ -152,9 +152,9 @@ export default function Evolution() {
     };
     //titre des colonnes du tableau
     const columns = [,
-      { field: 'nomenclature', headerName: 'Nomenclature',  sortable: false, filterable: false, disableColumnMenu: true,hideable: false, columnManageable: false },
-      { field: 'designation', headerName: 'Désignation',  sortable: false, filterable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
-      { field: 'especeUnite', headerName: 'Espèce unité',  filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
+      { field: 'nomenclature', headerName: 'Nomenclature', width:112, sortable: false, filterable: false, disableColumnMenu: true,hideable: false, columnManageable: false },
+      { field: 'designation', headerName: 'Désignation', width:200,renderCell: (params) => ( <div style={{ whiteSpace: 'pre-line' }}> {params.value}</div>), sortable: false, filterable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
+      { field: 'especeUnite', headerName: 'Espèce unite', width:70,renderHeader: () => ( <div style={{ whiteSpace: 'pre-line', lineHeight: '1.3em'  }}> {'Espèce unite'}</div>), sortable: false, filterable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
       {
           field: 'choisir',
           headerName: '',
