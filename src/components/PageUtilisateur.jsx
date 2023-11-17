@@ -19,7 +19,7 @@ export default function App() {
   //titre des colonnes du tableau
   const columns = [
     { field: 'nomenclature', headerName: 'Nomenclature', width:112, sortable: false, filterable: false, disableColumnMenu: true,hideable: false, columnManageable: false },
-    { field: 'designation', headerName: 'Désignation',width:650,renderCell: (params) => ( <div style={{ whiteSpace: 'pre-line' }}> {params.value}</div>),  sortable: false, filterable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
+    { field: 'designation', headerName: 'Désignation',width:500,renderCell: (params) => ( <div style={{ whiteSpace: 'pre-line' }}> {params.value}</div>),  sortable: false, filterable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
     { field: 'existantApresEcriture', headerName: 'Existant apres écriture', width:120,renderHeader: () => ( <div style={{ whiteSpace: 'pre-line', lineHeight: '1.3em'  }}> {'Existant apres écriture'}</div>), filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
     {
       field: 'recenser',
@@ -137,6 +137,7 @@ export default function App() {
   };
 
   return (<>
+  <Box>
     <NavBarUtilisateur></NavBarUtilisateur>
       <Box  style={{ marginLeft: 100,marginTop: 180 }} >{/* body */}
       <Box display="flex" flexDirection="row" flexWrap="wrap" justifyContent="space-between" sx={{ maxWidth:470 }}>{/* recherche et radiogroup */}
@@ -189,6 +190,7 @@ export default function App() {
         locale="fr" // Correction ici
       />
 
+    </Box>
     </Box>
     </>
   );

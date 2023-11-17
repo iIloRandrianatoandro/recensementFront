@@ -26,7 +26,7 @@ export default function Acceuil() {
   };
   return (
     <>
-    <div id="acceuil">
+    <div id="acceuil" style={{height:"100vh"}}>
       {page === 0 && (
         <div id="first">
            <AppBar id="navbar" position="fixed" sx={{ opacity:1, bgcolor: "common.white", boxShadow: 'none',borderBottom: '2px solid #ccc'}}>
