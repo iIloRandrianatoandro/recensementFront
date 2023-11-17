@@ -23,7 +23,6 @@ import "./style/index.css";
 import AdminRouteProtege from "./components/AdminRouteProtege";
 import UtilisateurRouteProtege from "./components/UtilisateurRouteProtege";
 import NavBarAdmin from "./components/NavBarAdmin";
-import AutoRefresh from "./components/AutoRefresh";
 
 function App() {
   const location = useLocation();
@@ -47,7 +46,6 @@ function App() {
           <Route path="/pageUtilisateur" element={<PageUtilisateur/>}></Route>
           <Route path="/recenserMateriel/:id" element={<RecenserMateriel/>}></Route>
         </Route>
-      <Route path="/seConnecter/" element={<SeConnecter/>}></Route>
       <Route path="/" element={<Acceuil/>}></Route>
       <Route path="/nav" element={<NavBarAdmin/>}></Route>
         
