@@ -20,6 +20,7 @@ import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { TextField } from '@mui/material';
 import Alert from '@mui/material/Alert';
 import { Box } from '@mui/material';
+import CircularProgress from '@mui/material/CircularProgress';
 
 import axios from "axios";
 
@@ -65,6 +66,7 @@ export default function ImporterListe() {
     const [confirme, setConfirme] = useState(false);
     const [infoNonComplete, setInfoNonComplete] = useState(false);
     const [anneeExistante, setAnneeExistante] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     //itinialiser annee
     const getAnnee = (newYear) => {
@@ -124,7 +126,7 @@ export default function ImporterListe() {
     const importerMateriel=async(e)=>{
       e.preventDefault();
       setImportEffectue(false);
-      setConfirme(false)
+      setConfirme(false); setLoading(true)
       await axios.request({
         url: `${baseUrl}/importer`,
         method:"POST",
@@ -137,14 +139,22 @@ export default function ImporterListe() {
         },            
       })
       .then(res=>{
-        if(res.status===200){setImportEffectue(true);}
+        if(res.status===200){
+          setLoading(false);
+          setImportEffectue(true);
+        }
       })
-      .catch(err=>{setErreur(true);console.log(err)})
+      .catch(err=>{
+        setLoading(false)
+        setErreur(true);
+        console.log(err)
+      })
     }
   return (
     <>
       <Dialog
       open={importer}//la boite de dialogie s'ouvre quand importer==true
+      style={{ opacity: loading ? 0.5 : 1 }}
       >
         <BootstrapDialogTitle id="customized-dialog-title" onClose={fermerFenetre}  sx={{ color: 'black' }}>
           Importer la liste des matériels à recenser
@@ -193,6 +203,23 @@ export default function ImporterListe() {
           </form>
         </DialogContent>
       </Dialog>
+      {loading && (
+        <Box
+        sx={{
+        position: "absolute", // Add position: absolute to bring it in front
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        zIndex: 10,
+        }}
+        >
+          <CircularProgress />
+        </Box>
+)}
       {importEffectue && (
       <div>
         <Dialog

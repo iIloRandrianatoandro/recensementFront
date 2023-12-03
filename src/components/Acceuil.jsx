@@ -29,14 +29,14 @@ export default function Acceuil() {
     <div id="acceuil" style={{height:"100vh"}}>
       {page === 0 && (
         <div id="first">
-           <AppBar id="navbar" position="fixed" sx={{ opacity:1, bgcolor: "common.white", boxShadow: 'none',borderBottom: '2px solid #ccc'}}>
+           <AppBar id="navbar" position="fixed" sx={{ opacity:1, bgcolor: "common.white", boxShadow: 'none'}}>
         <Toolbar>
         <div id="logo">
           <img src="/images/fop.jpg" alt="logo" />
         </div>
 
         <Typography
-          variant="h6"
+          variant="h7"
           component="div"
           sx={{ flexGrow: 1, ml: 2, color: "primary.main", fontWeight: "bold" }}
         >

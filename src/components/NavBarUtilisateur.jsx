@@ -29,7 +29,7 @@ export default function NavBarUtilisateur() {
         </div>
 
         <Typography
-          variant="h6"
+          variant="h7"
           component="div"
           sx={{ flexGrow: 1, ml: 2, color: "primary.main", fontWeight: "bold" }}
         >

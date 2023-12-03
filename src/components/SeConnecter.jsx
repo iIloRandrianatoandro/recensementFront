@@ -57,7 +57,6 @@ export default function SeConnecter() {
             }
           } catch (error) {
             console.error('Error during login:', error);
-            // Handle the error, e.g., set an error state or display a message
             setNotLogged(true);
           }
       };

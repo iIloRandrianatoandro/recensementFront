@@ -78,7 +78,7 @@ export default function NavBarAdmin(props) {
         
         <Box sx={{ flexGrow: 0}}>
           <Typography
-          variant="h6"
+          variant="h7"
           component="div"
           sx={{ flexGrow: 1, ml: 2, color: "primary.main", fontWeight: "bold" }}
         >
