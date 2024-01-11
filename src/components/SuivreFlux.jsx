@@ -49,7 +49,7 @@ import NavBarAdmin from './NavBarAdmin';
 export default function SuivreFlux() {
     //titre des colonnes du tableau
   const columns = [
-    { field: 'recense', headerName: 'Recense',width:75, filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
+    { field: 'recense', headerName: 'Recense',width:75, renderCell: (params) => ( <div > {params.value ? 'Oui' : 'Non'}</div>), filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
     { field: 'nomenclature', headerName: 'Nomenclature',width:112,  sortable: false, filterable: false, disableColumnMenu: true,hideable: false, columnManageable: false },
     { field: 'designation', headerName: 'Désignation',width:450,renderCell: (params) => ( <div style={{ whiteSpace: 'pre-line' }}> {params.value}</div>),sortable: false, filterable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
     { field: 'existantApresEcriture', headerName: 'Existant apres écriture', width:70,renderHeader: () => ( <div style={{ whiteSpace: 'pre-line', lineHeight: '1.3em'  }}> {'Existant apres écriture'}</div>), filterable: false, sortable: false, disableColumnMenu: true, hideable: false, columnManageable: false },
